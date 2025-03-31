@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel, { UseEmblaCarouselType } from 'embla-carousel-react';
 import type { EmblaOptionsType } from 'embla-carousel';
-import { ChevronLeft, ChevronRight } from 'lucide-react'; // Import Chevron icons
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image'; // Import next/image
 
 // Basic styling for the carousel - Adjusted button/icon sizes
 const carouselStyles = `
@@ -142,7 +143,6 @@ const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
 
 const BeforeAfterCarousel: React.FC<PropType> = (props) => {
   const { slides = slidesData, options } = props;
-  // Removed Autoplay plugin
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, ...options });
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
@@ -170,10 +170,9 @@ const BeforeAfterCarousel: React.FC<PropType> = (props) => {
   const onSelect = useCallback((emblaApi: UseEmblaCarouselType[1]) => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
-    // For looping carousels, buttons are always enabled if there's more than one slide
     setPrevBtnDisabled(slides.length <= 1);
     setNextBtnDisabled(slides.length <= 1);
-  }, [slides.length]); // Depend on slides.length
+  }, [slides.length]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -188,15 +187,17 @@ const BeforeAfterCarousel: React.FC<PropType> = (props) => {
   return (
     <>
       <style>{carouselStyles}</style>
-      <div className="embla relative" ref={emblaRef}> {/* Added relative positioning */}
+      <div className="embla relative" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((slide, index) => (
             <div className="embla__slide" key={index}>
-               {/* Display single image per slide, centered, max height 400px */}
-               <div className="flex justify-center items-center h-[450px]"> {/* Container to enforce height */}
-                 <img
+               <div className="flex justify-center items-center h-[450px]">
+                 {/* Replaced img with next/image */}
+                 <Image
                    src={slide.image}
                    alt={slide.alt}
+                   width={600} // Provide estimated width for optimization
+                   height={400} // Provide estimated height for optimization
                    className="max-h-[400px] w-auto object-contain rounded"
                  />
                </div>
@@ -204,7 +205,6 @@ const BeforeAfterCarousel: React.FC<PropType> = (props) => {
           ))}
         </div>
 
-        {/* Prev/Next Buttons */}
         <PrevButton onClick={scrollPrev} enabled={!prevBtnDisabled} />
         <NextButton onClick={scrollNext} enabled={!nextBtnDisabled} />
       </div>

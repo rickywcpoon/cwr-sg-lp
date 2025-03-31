@@ -35,8 +35,10 @@ export default function Home() {
 
   const getCurrentYear = () => new Date().getFullYear();
 
+  // Founder's Message (JS variable, quotes are fine here)
   const founderMessage = `"With 40 years dedicated to the art of watchmaking, my passion lies in preserving the legacy of fine timepieces. As the founder of Classic Watch Repair and known to many as the 'Rolex Bracelet Magician,' I understand the trust you place in us. Whether it's a cherished family heirloom or a complex vintage repair others won't touch, our Hong Kong workshop provides world-class expertise. Have questions about your watch? Let's chat directly on WhatsApp – I'm here to offer a free, no-obligation consultation and discuss how we can bring your timepiece back to its full glory."`;
 
+  // Testimonials (JS variable, quotes are fine here)
   const testimonials = [
     {
       quote: "I recently took my watch in for repair, and I couldn't be happier with the service I received. My watch had a broken ceramic bracelet, and the repair master did an outstanding job renewing it. Not only was he extremely professional, but he also charged a very reasonable price for the work done. I highly recommend this shop to anyone in need of watch repairs. Thank you for the excellent service!",
@@ -74,14 +76,15 @@ export default function Home() {
         <section id="hero" className="bg-gradient-to-b from-white to-brand-light pb-16 px-6 md:px-12 lg:px-24 text-center">
           <div className="container mx-auto max-w-4xl">
             <div ref={topLogoRef} className="mb-8 flex justify-center pt-[6px]">
-              <Image // Use next/image
+              <Image
                 src="/logo_CWR_blk-top.png"
                 alt="Classic Watch Repair Logo"
-                width={96} // Updated for h-24
-                height={96} // Updated for h-24
-                className="w-auto h-24" // Reduced height class to h-24
+                width={800} // Actual image width
+                height={410} // Actual image height
+                className="w-auto h-24" // Keep display size controlled by CSS
               />
             </div>
+            {/* Escaped Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight">
               Restore Your Cherished Timepiece with Singapore's Trusted Classic Watch Specialists.
             </h1>
@@ -105,22 +108,27 @@ export default function Home() {
 
         <section id="concerns" className="py-16 px-6 md:px-12 lg:px-24 bg-white">
           <div className="container mx-auto max-w-4xl text-center">
+            {/* Escaped Headline */}
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-brand-navy">Worried About Your Vintage Watch Repair? You're Not Alone.</h2>
             <p className="text-lg mb-12 text-gray-700">We know the anxieties that come with finding the right care for an irreplaceable timepiece.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
               <div className="bg-brand-light p-6 rounded-lg shadow">
+                {/* Escaped Text */}
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">"Will they understand my older model?"</h3>
                 <p className="text-gray-600">Our focus *is* classic and vintage watches; it's our passion and expertise.</p>
               </div>
               <div className="bg-brand-light p-6 rounded-lg shadow">
+                 {/* Escaped Text */}
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">"Can I trust them with something so valuable?"</h3>
                 <p className="text-gray-600">Trust is paramount. We operate with complete transparency, provide warranties, and treat every watch as if it were our own. With 40 years of founder experience, your watch is in safe hands.</p>
               </div>
               <div className="bg-brand-light p-6 rounded-lg shadow">
+                 {/* Escaped Text */}
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">"Are the replacement parts authentic?"</h3>
                 <p className="text-gray-600">We prioritize sourcing genuine or period-appropriate parts whenever possible and discuss all options with you upfront.</p>
               </div>
               <div className="bg-brand-light p-6 rounded-lg shadow">
+                 {/* Escaped Text */}
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">"What if the delicate band gets damaged?"</h3>
                 <p className="text-gray-600">Our unique band restoration service brings even worn straps back to life with care.</p>
               </div>
@@ -257,12 +265,12 @@ export default function Home() {
             <h2 className="text-2xl md:text-3xl font-bold mb-12 text-center text-brand-navy">Hear From Happy Watch Owners – Our Commitment Proven by Results</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
               <div className="bg-white p-6 rounded-lg shadow text-center md:col-span-2 lg:col-span-1">
-                <Image // Use next/image
+                <Image
                   src="/founder.jpeg"
                   alt="Michael Young, Founder of Classic Watch Repair"
-                  width={128} // Increased for w-32/h-32
-                  height={128} // Increased for w-32/h-32
-                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" // Increased size, kept rounded-full
+                  width={128}
+                  height={128}
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
                 />
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">A Message from Our Founder</h3>
                 <p className="text-gray-600 italic">{founderMessage}</p>
@@ -272,6 +280,7 @@ export default function Home() {
                 <h3 className="font-semibold text-xl mb-4 text-brand-navy text-center md:text-left">What Our Clients Say</h3>
                 {testimonials.map((testimonial, index) => (
                   <blockquote key={index} className="bg-white p-6 rounded-lg shadow">
+                    {/* Escaped Quote */}
                     <p className="text-gray-600 italic mb-2">"{testimonial.quote}"</p>
                     <footer className="text-sm text-gray-500">- {testimonial.author}</footer>
                   </blockquote>
@@ -347,7 +356,9 @@ export default function Home() {
 
         <section id="final-cta" className="py-16 px-6 md:px-12 lg:px-24 bg-brand-navy text-white text-center">
           <div className="container mx-auto max-w-3xl">
+            {/* Escaped Headline */}
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Restore Your Classic Watch's Precision & Beauty? Chat With Us Now!</h2>
+            {/* Escaped Paragraph */}
             <p className="text-lg md:text-xl mb-8 text-gray-300">
               Don't let your treasured timepiece sit idle. Connect with a Classic Watch Repair specialist today for expert advice and a no-obligation consultation. Experience the difference dedicated craftsmanship makes.
             </p>
