@@ -1,0 +1,66 @@
+﻿Project Brief: Classic Watch Repair - Singapore Landing Page
+Objective: To provide comprehensive context for an AI Coding Project Manager to plan and structure the project for creating a lead-generation landing page for Classic Watch Repair's entry into the Singapore market.
+1. Project Overview
+* Goal: Create a high-converting landing page for Classic Watch Repair targeting the Singapore market.
+* Primary Objective: Generate qualified leads by encouraging users to initiate contact via a sticky WhatsApp chat widget (bottom-right corner).
+* Target Audience: Affluent Singaporean owners (typically 30-60, professionals/business owners) of luxury and vintage timepieces (e.g., Rolex, Patek Philippe, Omega, vintage collectibles). They value craftsmanship, heritage, exclusivity, trust, and authenticity.
+* Key Success Metric: Number of qualified conversations initiated via the WhatsApp widget.
+2. Brand Context: Classic Watch Repair
+* Brand Name: Classic Watch Repair (Note: Always use the full name, not "CWR").
+* Background: A highly regarded watch repair and restoration company based in Central, Hong Kong, with over 20 years of operational experience.
+* Founder: Michael Young, a renowned figure ("world-renowned vintage watch restoration legend," famously known as "The Rolex Bracelet Magician") with 40 years of experience starting as a Rolex collector, complemented by a mechanical engineering background. Co-founder Mr. Sin (second-generation watchmaker) and Managing Partner Barry (@Bearwrist) are also key figures.
+* Core Mission/Purpose: To provide expert repair and restoration for collectible watches and clocks (vintage and modern), specializing in "Repairing What Others refuse to fix," particularly vintage models declined by official brand service centers. Focus on making watches functional ("Make it run...") and preserving horological heritage.
+* Core Philosophy & Values:
+   * Transparency: Free, accurate, no-obligation quotes and consultations; clear communication about parts and process.
+   * Expertise & Craftsmanship: Deep knowledge, particularly in vintage watches and intricate repairs (bands, cases).
+   * Customer Focus: Aiming to be the "Go-To' Guys For Watch Lovers, Collectors and Dealers."
+   * Integrity: Prioritizing genuine parts where possible, informing customers about non-original parts found.
+* Services: Comprehensive repair and restoration for mechanical, quartz, pocket watches, clocks (Swiss, German, Japanese). Specializes in:
+   * Vintage watch repair (esp. Rolex).
+   * Movement servicing (overhaul, cleaning, oiling, regulation).
+   * Band Repair & Restoration (tightening, laser welding, refinishing - key USP).
+   * Case, dial, hands restoration/refurbishing.
+   * Crystal replacement, water resistance testing.
+* Unique Selling Propositions (USPs): Vintage expertise, unparalleled band restoration, willingness to handle refused/complex repairs, transparency, significant experience, 6-month warranty on movement repairs, free initial assessment.
+* Credibility: >20 years experience, founder's 40yr history, "Rolex Bracelet Magician" title, 500 watches/month avg volume, 50k+ bands restored, global reputation, 250+ 5-star Google reviews (avg 5.0), strong positive testimonials within collector communities ("holy mecca").
+3. Market Context: Singapore
+* Reason for Entry: Strategic expansion via partnership with NAXO Timepiece (Tanjong Pagar) acting as a local drop-off/collection point.
+* Target Audience Deep Dive: Affluent, educated, internationally savvy. View watches as status symbols, investments, heirlooms. Active in online watch communities (Facebook groups, forums). Value exclusivity, quality, heritage, trust, and personalized experiences.
+* Key Audience Pain Points & Fears:
+   * HUGE fear of damage, scratches during service.
+   * Worry about counterfeit/non-original parts being used.
+   * Concern about inexperienced technicians mishandling valuable pieces.
+   * Fear of theft or swapping of parts/movements.
+   * Anxiety about losing water resistance or precision.
+   * Frustration with long wait times (2-3 months) at official service centers.
+   * Difficulty finding trusted specialists for vintage or complex repairs.
+   * Primary Need: Peace of mind, integrity, honesty, reliability.
+* Competitive Landscape: Includes official brand service centers, high-end independents (e.g., Global Watch Service Centre - emphasizes Swiss training, integrity; Bonfield Watch Atelier - emphasizes heritage, bespoke restoration), and trusted traditional watchmakers (e.g., Top Hour/Mr. Lim - known for Rolex expertise, honesty, reasonable prices). Competitors heavily use credentials, experience, testimonials, and Google reviews as trust signals.
+* Value Perception: Value-conscious premium buyers. Willing to pay for quality/assurance. Transparency in pricing is crucial. Warranty is expected (6-12 months from independents). Perceive value in expertise, reliability, and convenience. CWR should aim for mid-to-high independent pricing, justified by HK expertise, niche skills, warranty, and convenience.
+4. Communication Strategy (Voice, Tone, Messaging)
+* Core Brand Voice: Trusted Master Craftsman (Combines essential Trust with Expertise).
+* Supporting Tones: Reassuring & Empathetic; Meticulously Transparent; Respectful of Heritage & Passion; Confident & Authoritative (Not Boastful).
+* Communication USP/Angle: Position Classic Watch Repair as the trusted bridge to world-class Hong Kong expertise for specialized restoration (vintage, complex, refused cases), made convenient via the local NAXO partnership.
+* Key Messaging Pillars:
+   1. Unwavering Trust & Security: Directly address fears (secure logistics, genuine parts, expert care, warranty).
+   2. World-Renowned Expertise: Leverage HK heritage, founder's reputation ("Magic"), reviews, experience.
+   3. Specialist Problem-Solvers: Highlight the niche focus on vintage, complex, and refused repairs.
+   4. Transparent Value: Emphasize free assessment, clear quotes, fair premium pricing, warranty.
+   5. Seamless Local Convenience: Promote the easy NAXO drop-off/pick-up process.
+5. Landing Page Requirements
+* Primary CTA: Sticky WhatsApp chat widget (bottom-right). All page elements should guide users towards initiating a conversation here.
+* Suggested Page Structure/Flow: (Based on cwr_sg_landing_page_flow document)
+   1. Hero Section: Compelling Headline/Sub-headline (USP focus), high-quality visual, subtle prompt towards WhatsApp.
+   2. Address Key Concerns (Problem/Pain Point): Empathetic acknowledgement of user fears.
+   3. Introduce the Solution & Expertise: Showcase Classic Watch Repair's core strengths and differentiators.
+   4. How It Works (Simplified & Secure Process): Explain the NAXO drop-off & HK repair process visually and concisely, emphasizing security.
+   5. Build Unshakeable Trust & Credibility: Combine multiple proof points (experience, reviews, founder rep, warranty, NAXO partnership, testimonials). Critical section.
+   6. Highlight Key Services (Optional but Recommended): Showcase specific expertise areas with visuals and service-specific WhatsApp prompts.
+   7. Final Call to Action: Strong concluding push towards the WhatsApp widget, summarizing the benefit (peace of mind, expert care).
+* Content & Tone: All copy must adhere strictly to the defined Brand Voice/Tone and Messaging Strategy. Use "Classic Watch Repair" consistently.
+* Visual Style: Maintain a clean, professional, high-quality aesthetic reflecting the luxury nature of the service (referencing the provided homepage screenshot). Prioritize excellent mobile responsiveness. The WhatsApp widget should be prominent but not intrusive.
+* Functionality: The WhatsApp widget must function correctly on desktop and mobile, initiating a chat with the designated Classic Watch Repair contact number.
+6. Key Partnership: NAXO Timepiece
+* NAXO Timepiece (Tanjong Pagar, Singapore) serves as the official local drop-off and collection point.
+* This partnership is crucial for providing local convenience, building trust, and managing logistics. It should be clearly communicated on the landing page. Classic Watch Repair handles the expert repair work in Hong Kong and manages the secure, insured shipping between Singapore and Hong Kong.
+This brief provides the necessary context for planning the development of the Classic Watch Repair Singapore landing page project. Please ensure the project plan accounts for all requirements, particularly the focus on building trust and driving conversions via the WhatsApp CTA.
