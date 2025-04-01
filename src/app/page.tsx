@@ -208,17 +208,19 @@ export default function Home() {
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center text-brand-navy">Our Simple, Secure & Transparent Watch Repair Process</h2>
             <p className="text-lg mb-12 text-center text-gray-700">In partnership with NAXO Timepiece in Singapore.</p>
             <ol className="relative border-s border-brand-gray dark:border-gray-700 ml-6 md:ml-12">
-              <li className="mb-10 ms-8">
+              {/* Added animate-on-scroll class and animation style with delay */}
+              <li className="mb-10 ms-8 animate-on-scroll" style={{ animation: 'fadeSlideIn 0.8s ease-out forwards', animationDelay: '0.2s' }}>
                 <span className="absolute flex items-center justify-center w-10 h-10 bg-brand-gold rounded-full -start-5 ring-4 ring-white dark:ring-gray-900 text-white">
-                  <MessageSquareText className="icon-step text-white" aria-hidden="true" />
+                  {/* Icon Placeholder */} <div className="w-5 h-5 bg-white rounded-sm"></div>
                 </span>
                 <h3 className="flex items-center mb-1 text-lg font-semibold text-brand-navy">Initial Consultation (WhatsApp)</h3>
                 <time className="block mb-2 text-sm font-normal leading-none text-gray-500 dark:text-gray-500">Step 1</time>
                 <p className="mb-4 text-base font-normal text-gray-600 dark:text-gray-400">Tap the chat button to discuss your watch's issue with a Classic Watch Repair specialist and get an initial estimate.</p>
               </li>
-              <li className="mb-10 ms-8">
+              {/* Added animate-on-scroll class and animation style with delay */}
+              <li className="mb-10 ms-8 animate-on-scroll" style={{ animation: 'fadeSlideIn 0.8s ease-out forwards', animationDelay: '0.4s' }}>
                 <span className="absolute flex items-center justify-center w-10 h-10 bg-brand-gold rounded-full -start-5 ring-4 ring-white dark:ring-gray-900 text-white">
-                  <MapPin className="icon-step text-white" aria-hidden="true" />
+                  {/* Icon Placeholder */} <div className="w-5 h-5 bg-white rounded-sm"></div>
                 </span>
                 <h3 className="flex items-center mb-1 text-lg font-semibold text-brand-navy">Secure Drop-off (NAXO Timepiece)</h3>
                 <time className="block mb-2 text-sm font-normal leading-none text-gray-500 dark:text-gray-500">Step 2</time>
@@ -231,25 +233,28 @@ export default function Home() {
                   className="mt-2 w-auto"
                 />
               </li>
-              <li className="mb-10 ms-8">
+              {/* Added animate-on-scroll class and animation style with delay */}
+              <li className="mb-10 ms-8 animate-on-scroll" style={{ animation: 'fadeSlideIn 0.8s ease-out forwards', animationDelay: '0.6s' }}>
                 <span className="absolute flex items-center justify-center w-10 h-10 bg-brand-gold rounded-full -start-5 ring-4 ring-white dark:ring-gray-900 text-white">
-                  <Wrench className="icon-step text-white" aria-hidden="true" />
+                  {/* Icon Placeholder */} <div className="w-5 h-5 bg-white rounded-sm"></div>
                 </span>
                 <h3 className="flex items-center mb-1 text-lg font-semibold text-brand-navy">Expert Repair <span className="text-sm text-gray-500 ml-2">(Specialist Hong Kong Workshop)</span></h3>
                 <time className="block mb-2 text-sm font-normal leading-none text-gray-500 dark:text-gray-500">Step 3</time>
                 <p className="text-base font-normal text-gray-600 dark:text-gray-400">Your timepiece receives specialized care at our world-class Hong Kong workshop, leveraging decades of focused vintage expertise.</p>
               </li>
-              <li className="mb-10 ms-8">
+              {/* Added animate-on-scroll class and animation style with delay */}
+              <li className="mb-10 ms-8 animate-on-scroll" style={{ animation: 'fadeSlideIn 0.8s ease-out forwards', animationDelay: '0.8s' }}>
                 <span className="absolute flex items-center justify-center w-10 h-10 bg-brand-gold rounded-full -start-5 ring-4 ring-white dark:ring-gray-900 text-white">
-                  <CheckCircle className="icon-step text-white" aria-hidden="true" />
+                  {/* Icon Placeholder */} <div className="w-5 h-5 bg-white rounded-sm"></div>
                 </span>
                 <h3 className="flex items-center mb-1 text-lg font-semibold text-brand-navy">Updates & Approval</h3>
                 <time className="block mb-2 text-sm font-normal leading-none text-gray-500 dark:text-gray-500">Step 4</time>
                 <p className="text-base font-normal text-gray-600 dark:text-gray-400">We provide detailed updates and confirm any necessary work with you before proceeding.</p>
               </li>
-              <li className="ms-8">
+              {/* Added animate-on-scroll class and animation style with delay */}
+              <li className="ms-8 animate-on-scroll" style={{ animation: 'fadeSlideIn 0.8s ease-out forwards', animationDelay: '1.0s' }}>
                 <span className="absolute flex items-center justify-center w-10 h-10 bg-brand-gold rounded-full -start-5 ring-4 ring-white dark:ring-gray-900 text-white">
-                  <PackageCheck className="icon-step text-white" aria-hidden="true" />
+                  {/* Icon Placeholder */} <div className="w-5 h-5 bg-white rounded-sm"></div>
                 </span>
                 <h3 className="flex items-center mb-1 text-lg font-semibold text-brand-navy">Secure Return & Collection</h3>
                 <time className="block mb-2 text-sm font-normal leading-none text-gray-500 dark:text-gray-500">Step 5</time>
