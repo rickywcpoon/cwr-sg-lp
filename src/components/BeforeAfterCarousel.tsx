@@ -86,19 +86,20 @@ const carouselStyles = `
   }
 `;
 
-// Updated slide data: simple list of images and alts
+// Updated slide data: includes captions
 const slidesData = [
-  { image: '/omega-before.jpg', alt: 'Omega watch before restoration' },
-  { image: '/omega-after.jpg', alt: 'Omega watch after restoration' },
-  { image: '/watch-band1-before-and-after.jpg', alt: 'Watch band 1 before and after restoration' },
-  { image: '/watch-band2-before-and-after.jpg', alt: 'Watch band 2 before and after restoration' },
-  { image: '/movement1-after.jpeg', alt: 'Watch movement after servicing' },
+  { image: '/omega-before.jpg', alt: 'Omega watch before restoration', caption: 'Omega Seamaster: Before Restoration' },
+  { image: '/omega-after.jpg', alt: 'Omega watch after restoration', caption: 'Omega Seamaster: After Full Restoration & Service' },
+  { image: '/watch-band1-before-and-after.jpg', alt: 'Watch band 1 before and after restoration', caption: 'Rolex Jubilee Bracelet: Before & After Tightening' },
+  { image: '/watch-band2-before-and-after.jpg', alt: 'Watch band 2 before and after restoration', caption: 'Vintage Bracelet: Before & After Laser Welding Repair' },
+  { image: '/movement1-after.jpeg', alt: 'Watch movement after servicing', caption: 'Meticulously Serviced Movement' },
 ];
 
 // Define new type for slide data
 type SlideData = {
   image: string;
   alt: string;
+  caption: string; // Added caption field
 };
 
 type PropType = {
@@ -188,22 +189,24 @@ const BeforeAfterCarousel: React.FC<PropType> = (props) => {
     <>
       <style>{carouselStyles}</style>
       <div className="embla relative" ref={emblaRef}>
-        <div className="embla__container">
-          {slides.map((slide, index) => (
-            <div className="embla__slide" key={index}>
-               <div className="flex justify-center items-center h-[450px]">
-                 {/* Replaced img with next/image */}
-                 <Image
-                   src={slide.image}
-                   alt={slide.alt}
+         <div className="embla__container">
+           {slides.map((slide, index) => (
+             <div className="embla__slide" key={index}>
+                <div className="flex flex-col justify-center items-center h-[450px]"> {/* Changed to flex-col */}
+                  {/* Replaced img with next/image */}
+                  <Image
+                    src={slide.image}
+                    alt={slide.alt}
                    width={600} // Provide estimated width for optimization
                    height={400} // Provide estimated height for optimization
-                   className="max-h-[400px] w-auto object-contain rounded"
-                 />
-               </div>
-            </div>
-          ))}
-        </div>
+                    className="max-h-[400px] w-auto object-contain rounded"
+                  />
+                  {/* Added Caption */}
+                  <p className="text-center text-sm text-gray-600 mt-2">{slide.caption}</p>
+                </div>
+             </div>
+           ))}
+         </div>
 
         <PrevButton onClick={scrollPrev} enabled={!prevBtnDisabled} />
         <NextButton onClick={scrollNext} enabled={!nextBtnDisabled} />

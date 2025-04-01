@@ -85,16 +85,16 @@ export default function Home() {
               />
             </div>
             {/* Escaped Headline */}
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-fade-slide-in" style={{ animationDelay: '0.2s' }}>
               Restore Your Cherished Timepiece with Singapore's Trusted Classic Watch Specialists.
             </h1>
-            <p className="text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-fade-slide-in" style={{ animationDelay: '0.4s' }}>
               Experience meticulous care and seamless service for your vintage watch. We specialize in the complex repairs others decline.
             </p>
-            <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300">
+            <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 animate-pulse-on-load" style={{ animationDelay: '0.6s' }}>
               <MessageCircle className="w-4 h-4 mr-2" /> Chat on WhatsApp
             </a>
-            <div className="mt-12">
+            <div className="mt-12 animate-fade-slide-in" style={{ animationDelay: '0.8s' }}>
               <Image
                 src="/hero-banner.jpg"
                 alt="Close-up of watchmaker's hands repairing a classic watch movement"
@@ -394,7 +394,7 @@ export default function Home() {
         href="https://wa.me/85260616572"
         target="_blank"
         rel="noopener noreferrer"
-        className="whatsapp-sticky bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center"
+        className="whatsapp-sticky bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center animate-glow-on-load"
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle className="icon-whatsapp text-white" aria-hidden="true" />

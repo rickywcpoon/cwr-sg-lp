@@ -81,7 +81,28 @@ body {
     color: #dc2626; /* Tailwind red-600 */
  }
 
-/* Keyframes for bounce animation */
+/* --- Animation Classes --- */
+
+/* Initial state for fade-in/slide-in */
+.animate-fade-slide-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeSlideIn 0.8s ease-out forwards;
+}
+
+/* Initial state for button pulse */
+.animate-pulse-on-load {
+  animation: pulseOnLoad 1.5s ease-out forwards;
+}
+
+/* Initial state for widget glow */
+.animate-glow-on-load {
+  animation: glowOnLoad 2s ease-out forwards;
+}
+
+/* --- Keyframes --- */
+
+/* Keyframes for bounce animation (existing) */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -92,4 +113,26 @@ body {
   60% {
     transform: translateY(-4px); /* Adjust bounce height */
   }
+}
+
+/* Keyframes for fade-in/slide-in */
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for button pulse on load */
+@keyframes pulseOnLoad {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Keyframes for widget glow on load */
+@keyframes glowOnLoad {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } /* Start with no glow (green-500 base) */
+  70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } /* Expand glow and fade out */
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } /* End with no glow */
 }
