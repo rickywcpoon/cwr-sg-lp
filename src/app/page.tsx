@@ -281,8 +281,12 @@ export default function Home() {
                 {testimonials.map((testimonial, index) => (
                   <blockquote key={index} className="bg-white p-6 rounded-lg shadow">
                     {/* Escaped Quote */}
-                    <p className="text-gray-600 italic mb-2">"{testimonial.quote}"</p>
-                    <footer className="text-sm text-gray-500">- {testimonial.author}</footer>
+                    <p className="text-gray-600 italic mb-4">"{testimonial.quote}"</p> {/* Increased bottom margin */}
+                    <footer className="flex items-center text-sm text-gray-500">
+                      {/* Placeholder for Headshot */}
+                      <div className="w-8 h-8 rounded-full bg-brand-gray mr-2 flex-shrink-0"></div>
+                      - {testimonial.author}
+                    </footer>
                   </blockquote>
                 ))}
                 <div className="bg-white p-4 rounded-lg shadow flex items-center justify-center space-x-2">
@@ -291,9 +295,11 @@ export default function Home() {
                     alt="Google Reviews icon"
                     width={40}
                     height={40}
-                    className="w-auto"
+                    className="w-auto h-10" /* Adjusted height */
                   />
                   <div>
+                    {/* Placeholder for Star Rating Graphic */}
+                    <div className="text-brand-gold text-xl">★★★★★</div>
                     <p className="text-lg font-semibold text-brand-gold leading-tight">Rated 5.0 / 5 Stars</p>
                     <p className="text-sm text-gray-500 leading-tight">from 468 Google Reviews</p>
                   </div>
@@ -303,10 +309,12 @@ export default function Home() {
               <div className="space-y-6 md:col-span-2 lg:col-span-1">
                 <h3 className="font-semibold text-xl mb-4 text-brand-navy text-center md:text-left">Our Guarantee</h3>
                 <div className="bg-white p-6 rounded-lg shadow flex items-center space-x-4">
+                  {/* Placeholder for Warranty Badge */}
+                  <div className="w-10 h-10 rounded-full bg-brand-gold text-white flex items-center justify-center text-xs font-bold mr-2 flex-shrink-0">6M</div>
                   <ShieldCheck className="icon-guarantee text-brand-gold" aria-hidden="true" />
                   <div>
                     <h4 className="font-semibold text-lg text-brand-navy">Peace of Mind Warranty</h4>
-                    <p className="text-gray-600">All our full services come with a <span className="text-warranty-red font-semibold">[X months]</span> warranty.</p>
+                    <p className="text-gray-600">All our full services come with a 6 months warranty.</p>
                   </div>
                 </div>
                 <div className="bg-white p-6 rounded-lg shadow flex items-center space-x-4">
@@ -344,12 +352,12 @@ export default function Home() {
           <div className="container mx-auto max-w-4xl text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-brand-navy">Comprehensive Care for Your Classic Timepiece</h2>
             <div className="flex flex-wrap justify-center gap-4 text-gray-700">
-              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm">Movement Overhaul</span>
-              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm">Vintage Restoration</span>
-              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm">Band Repair & Restoration</span>
-              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm">Case Polishing</span>
-              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm">Water Resistance Testing</span>
-              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm">Battery Replacement</span>
+              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm transition duration-300 hover:shadow-md hover:bg-gray-200 cursor-default">Movement Overhaul</span>
+              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm transition duration-300 hover:shadow-md hover:bg-gray-200 cursor-default">Vintage Restoration</span>
+              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm transition duration-300 hover:shadow-md hover:bg-gray-200 cursor-default">Band Repair & Restoration</span>
+              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm transition duration-300 hover:shadow-md hover:bg-gray-200 cursor-default">Case Polishing</span>
+              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm transition duration-300 hover:shadow-md hover:bg-gray-200 cursor-default">Water Resistance Testing</span>
+              <span className="bg-brand-light px-4 py-2 rounded-full shadow-sm transition duration-300 hover:shadow-md hover:bg-gray-200 cursor-default">Battery Replacement</span>
             </div>
           </div>
         </section>
@@ -366,7 +374,7 @@ export default function Home() {
               <MessageCircle className="w-4 h-4 mr-2" /> Chat on WhatsApp
             </a>
             <p className="text-sm text-gray-400">
-              <a href="#process" className="underline hover:text-white">Learn more about our secure drop-off process with NAXO Timepiece.</a>
+              <a href="#process" className="underline hover:text-white transition duration-300">Learn more about our secure drop-off process with NAXO Timepiece.</a>
             </p>
           </div>
         </section>
