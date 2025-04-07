@@ -271,16 +271,19 @@ export default function Home() {
     };
   }, []); // Run once on mount
 
-  // Throttle utility function
-  const throttle = (func: (...args: any[]) => void, limit: number) => {
+  // Throttle utility function with generics and arrow function
+  const throttle = <T extends (...args: any[]) => any>(func: T, limit: number) => {
     let inThrottle: boolean;
-    return function(this: any, ...args: any[]) {
-      const context = this;
+    let lastResult: ReturnType<T>; // Store the result type
+
+    return (...args: Parameters<T>): ReturnType<T> => { // Use arrow function and specify return type
       if (!inThrottle) {
-        func.apply(context, args);
+        // Pass null as 'this' context since the wrapped functions don't need it
+        lastResult = func.apply(null, args);
         inThrottle = true;
         setTimeout(() => inThrottle = false, limit);
       }
+      return lastResult; // Return the last computed result
     };
   };
 
