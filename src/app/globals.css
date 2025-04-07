@@ -81,6 +81,167 @@ body {
     color: #dc2626; /* Tailwind red-600 */
  }
 
+/* --- WhatsApp CTA Enhancements (Section 3.1) --- */
+
+/* Prominent WhatsApp Button */
+.whatsapp-button {
+  position: fixed;
+  bottom: 30px; /* Increased from 1.5rem */
+  right: 30px; /* Increased from 1.5rem */
+  width: 60px; /* Increased size */
+  height: 60px; /* Increased size */
+  background-color: #25D366; /* WhatsApp green */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+  z-index: 1000; /* Ensure it's above other elements */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+}
+
+/* Remove old .whatsapp-sticky styles if they conflict or are redundant */
+/* .whatsapp-sticky { ... } */
+
+/* Message Tooltip */
+.whatsapp-tooltip {
+  position: absolute;
+  top: -60px; /* Position above the button */
+  right: 0;
+  background-color: white;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Arrow pointing down */
+  right: 25px; /* Position arrow */
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  transform: rotate(45deg);
+}
+
+.whatsapp-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timed Popup */
+.whatsapp-popup {
+  position: fixed;
+  bottom: 100px; /* Position above the main button */
+  right: 30px;
+  width: 280px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px 40px 15px 15px; /* Increased right padding */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  z-index: 999; /* Below main button but above content */
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.whatsapp-popup.visible {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: all; /* Allow interaction when visible */
+}
+
+.whatsapp-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #999;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.whatsapp-popup-close:hover {
+  color: #333;
+}
+
+/* Social Proof Badge */
+.social-proof-badge {
+  position: absolute;
+  /* Removed top positioning */
+  bottom: 10px; /* Align near the bottom of the button */
+  right: 70px; /* Position left of the button (60px width + 10px gap) */
+  background-color: #f8fafc; /* Light background */
+  border: 1px solid #e2e8f0; /* Light border */
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  white-space: nowrap;
+  color: #4a5568; /* Gray text */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.3s ease; /* Add transition */
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.social-proof-badge.visible {
+  opacity: 1; /* Show when visible class is added */
+  pointer-events: all; /* Allow interaction when visible */
+}
+
+/* --- Mobile Adjustments for WhatsApp CTA (Section 4.1) --- */
+@media (max-width: 768px) {
+  .whatsapp-button {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .whatsapp-button svg {
+    width: 28px; /* Adjust icon size for smaller button */
+    height: 28px;
+  }
+
+  .whatsapp-popup {
+    bottom: 90px; /* Adjust popup position */
+    right: 20px;
+    width: calc(100% - 40px); /* Make popup wider on mobile */
+    max-width: 280px;
+  }
+
+  .whatsapp-tooltip {
+    /* Optionally hide tooltip on mobile if too cluttered */
+    /* display: none; */
+  }
+
+  .social-proof-badge {
+     /* Optionally hide badge on mobile if too cluttered */
+    /* display: none; */
+  }
+}
+
+
 /* --- Animation Classes --- */
 
 /* Initial state for fade-in/slide-in */
@@ -142,4 +303,1034 @@ body {
   0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } /* Start with no glow (green-500 base) */
   70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } /* Expand glow and fade out */
   100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } /* End with no glow */
+}
+
+/* --- Scroll Animation Styles (Section 2.1) --- */
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Reduced duration from 0.6s */
+}
+
+.fade-in.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progressive reveal for process steps */
+.process-step {
+  opacity: 0;
+  transform: translateX(-20px); /* Slide in from left */
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.process-step.animated {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered animation delay for process steps */
+/* These delays are applied inline in page.tsx for now, but could be defined here */
+/* .process-step:nth-child(1) { transition-delay: 0.1s; } */
+/* .process-step:nth-child(2) { transition-delay: 0.2s; } */
+/* ... etc ... */
+
+/* Parallax effect (Placeholder - Requires specific element structure) */
+.parallax-bg {
+  /* Example - Apply to a background div */
+  /* background-attachment: fixed; */
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  /* height: 400px; */
+  /* transform: translateZ(-1px) scale(1.5); */ /* Requires perspective on parent */
+  /* z-index: -1; */
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .fade-in,
+  .process-step,
+  .parallax-bg,
+  .feature-icon, /* Include other animated elements */
+  .review-star,
+  .whatsapp-tooltip,
+  .whatsapp-popup,
+  .recent-contact-notification,
+  .cta-button, /* Include pulse animation target */
+  .whatsapp-sticky /* Include bounce animation target */
+  {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important; /* Reset transforms */
+    opacity: 1 !important; /* Ensure visibility */
+  }
+
+  /* Ensure elements meant to be initially hidden are visible */
+  .animate-on-scroll {
+    opacity: 1 !important;
+  }
+
+  /* Reset specific animation states if needed */
+  .whatsapp-tooltip, .whatsapp-popup {
+     /* Keep initial hidden state if controlled by JS/React state */
+     /* opacity: 0 !important; */
+  }
+}
+
+/* --- Hero Section Improvements (Section 1.1) --- */
+
+/* Hero Headline Animation */
+.hero-headline { /* Assuming this class is added to the h1 */
+  opacity: 0;
+  transform: translateY(20px);
+  /* Using existing fadeSlideIn animation, but could define fadeInUp */
+  /* animation: fadeInUp 0.8s ease-out 0.2s forwards; */
+}
+/* Keyframes for fadeInUp if needed */
+/* @keyframes fadeInUp { ... } */
+
+/* Hero Image Depth Effect */
+.hero-image {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Added box-shadow transition */
+}
+
+.hero-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Trust Indicator */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  border-radius: 20px;
+  padding: 6px 12px;
+  /* margin-left: 16px; */ /* Spacing handled by parent flex */
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-brand-navy); /* Use brand navy for text */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.trust-badge svg {
+  color: #FFD700; /* Gold color for star */
+  margin-right: 4px;
+  height: 16px;
+  width: 16px;
+}
+
+/* CTA Button Pulse Animation */
+.cta-button { /* Applied to the hero CTA button */
+  /* animation: pulse 2s infinite; */ /* Disabled for now, can re-enable */
+  /* animation-delay: 3s; */
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(180, 140, 90, 0.4); /* Use brand gold color */
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(180, 140, 90, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(180, 140, 90, 0);
+  }
+}
+
+/* --- Visual Hierarchy Refinement (Section 1.2) --- */
+
+/* Text Contrast Enhancement */
+.section-heading {
+  /* Applied via Tailwind classes like text-brand-navy, font-bold etc. */
+  /* Add specific overrides if needed */
+  letter-spacing: -0.025em; /* Example refinement */
+}
+
+.section-subheading {
+   /* Applied via Tailwind classes like text-gray-700 etc. */
+   /* Add specific overrides if needed */
+}
+
+.body-text {
+  color: #4a5568; /* Tailwind gray-700 */
+  line-height: 1.7; /* Increased line height for readability */
+}
+
+/* Section Spacing & Dividers */
+.page-section {
+  /* padding: 4rem 0; */ /* Padding handled by Tailwind */
+  margin-bottom: 2rem; /* Add consistent bottom margin */
+  position: relative;
+}
+
+.page-section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem; /* Position divider between sections */
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  /* Subtle gradient divider */
+  background: linear-gradient(to right, transparent, rgba(203, 213, 224, 0.7), transparent);
+}
+
+/* Background Texture for Trust Section */
+.trust-section {
+  /* Applied to the container div within the trust section */
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f7fafc' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #f8fafc; /* Tailwind gray-50 */
+  border-radius: 8px;
+  padding: 2.5rem; /* Add padding */
+  margin: 3rem 0; /* Add vertical margin */
+}
+
+/* --- Image and Media Enhancements (Section 1.3) --- */
+
+/* Image Zoom Effect */
+.detail-image {
+  overflow: hidden; /* Ensure zoom stays within bounds */
+  border-radius: 6px; /* Match spec */
+}
+
+.detail-image img {
+  transition: transform 0.4s ease-out;
+  width: 100%; /* Ensure image fills container */
+  /* height: auto; */ /* Removed to allow Tailwind height classes to take effect */
+  display: block; /* Remove extra space below image */
+}
+
+.detail-image:hover img {
+  transform: scale(1.05); /* Subtle zoom */
+}
+
+/* Video Loop (Placeholder - requires video element) */
+.craftsman-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+/* --- Micro-Animations and Interactions (Section 2.2) --- */
+
+/* Enhanced WhatsApp Button Animation (Delay) */
+.whatsapp-button { /* Target the main button */
+  animation: bounce 3s infinite ease-in-out;
+  animation-delay: 5s; /* Add 5-second delay */
+}
+
+/* Hover states for clickable elements */
+.clickable {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable:hover {
+  transform: translateY(-2px) scale(1.02); /* Lift and slightly enlarge */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Tilt effect on service cards (Apply .service-card class in JSX) */
+.service-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: white;
+  height: 100%; /* Ensure cards in a grid align */
+}
+
+.service-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg); /* Subtle 3D tilt */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+/* Icon animations */
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+
+.feature-icon.animated { /* Triggered by IntersectionObserver */
+  animation: iconPop 0.5s ease-out forwards;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Feedback Mechanisms (Section 2.3) --- */
+
+/* Button ripple effect */
+.btn { /* Apply to buttons */
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5); /* White ripple */
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after { /* Ripple on focus/click */
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%); /* Start small at center */
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40, 40) translate(-50%, -50%); /* Expand outwards */
+    opacity: 0;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading animation (Placeholder - use if needed for dynamic content) */
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3b82f6; /* Blue color */
+  animation: spin 1s ease-in-out infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Update reduced motion for new interactive elements */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important; /* Disable smooth scroll */
+  }
+  .clickable, .service-card, .btn::after, .loading-spinner {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .clickable:hover, .service-card:hover {
+     box-shadow: none !important; /* Remove hover shadow */
+  }
+  /* Removed extra brace */
+}
+
+/* --- Visual Hierarchy Refinement (Section 1.2) --- */
+
+/* Text Contrast Enhancement */
+.section-heading {
+  /* Applied via Tailwind classes like text-brand-navy, font-bold etc. */
+  /* Add specific overrides if needed */
+  letter-spacing: -0.025em; /* Example refinement */
+}
+
+.section-subheading {
+   /* Applied via Tailwind classes like text-gray-700 etc. */
+   /* Add specific overrides if needed */
+}
+
+.body-text {
+  color: #4a5568; /* Tailwind gray-700 */
+  line-height: 1.7; /* Increased line height for readability */
+}
+
+/* Section Spacing & Dividers */
+.page-section {
+  /* padding: 4rem 0; */ /* Padding handled by Tailwind */
+  margin-bottom: 2rem; /* Add consistent bottom margin */
+  position: relative;
+}
+
+.page-section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem; /* Position divider between sections */
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  /* Subtle gradient divider */
+  background: linear-gradient(to right, transparent, rgba(203, 213, 224, 0.7), transparent);
+}
+
+/* Background Texture for Trust Section */
+.trust-section {
+  /* Applied to the container div within the trust section */
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f7fafc' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #f8fafc; /* Tailwind gray-50 */
+  border-radius: 8px;
+  padding: 2.5rem; /* Add padding */
+  margin: 3rem 0; /* Add vertical margin */
+}
+
+/* --- Image and Media Enhancements (Section 1.3) --- */
+
+/* Image Zoom Effect */
+.detail-image {
+  overflow: hidden; /* Ensure zoom stays within bounds */
+  border-radius: 6px; /* Match spec */
+}
+
+.detail-image img {
+  transition: transform 0.4s ease-out;
+  width: 100%; /* Ensure image fills container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove extra space below image */
+}
+
+.detail-image:hover img {
+  transform: scale(1.05); /* Subtle zoom */
+}
+
+/* Video Loop (Placeholder - requires video element) */
+.craftsman-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+/* --- Micro-Animations and Interactions (Section 2.2) --- */
+
+/* Enhanced WhatsApp Button Animation (Delay) */
+.whatsapp-button { /* Target the main button */
+  animation: bounce 3s infinite ease-in-out;
+  animation-delay: 5s; /* Add 5-second delay */
+}
+
+/* Hover states for clickable elements */
+.clickable {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable:hover {
+  transform: translateY(-2px) scale(1.02); /* Lift and slightly enlarge */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Tilt effect on service cards (Apply .service-card class in JSX) */
+.service-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: white;
+  height: 100%; /* Ensure cards in a grid align */
+}
+
+.service-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg); /* Subtle 3D tilt */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+/* Icon animations */
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+
+.feature-icon.animated { /* Triggered by IntersectionObserver */
+  animation: iconPop 0.5s ease-out forwards;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Feedback Mechanisms (Section 2.3) --- */
+
+/* Button ripple effect */
+.btn { /* Apply to buttons */
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5); /* White ripple */
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after { /* Ripple on focus/click */
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%); /* Start small at center */
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40, 40) translate(-50%, -50%); /* Expand outwards */
+    opacity: 0;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading animation (Placeholder - use if needed for dynamic content) */
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3b82f6; /* Blue color */
+  animation: spin 1s ease-in-out infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Update reduced motion for new interactive elements */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important; /* Disable smooth scroll */
+  }
+  .clickable, .service-card, .btn::after, .loading-spinner {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .clickable:hover, .service-card:hover {
+     box-shadow: none !important; /* Remove hover shadow */
+  }
+}
+
+
+/* --- Mobile Experience Enhancements (Section 4.1) --- */
+@media (max-width: 768px) {
+  /* Optimized Tap Targets */
+  .nav-link, .btn, .clickable, .whatsapp-popup-close, .read-more-btn, .read-less-btn {
+    min-height: 44px;
+    min-width: 44px;
+    /* Ensure sufficient padding for touch */
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
+    /* display: inline-flex; */ /* Use flex for alignment if needed */
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+
+  /* Spacing between clickable elements (example) */
+  .nav-link + .nav-link,
+  .btn + .btn {
+    margin-left: 8px;
+  }
+
+  /* Enhanced Sticky Header */
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    backdrop-filter: blur(5px); /* Blur effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 100; /* Ensure it's above content */
+    padding: 12px 16px;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    /* Apply directly to header element in page.tsx */
+  }
+
+  .mobile-header.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    box-shadow: none;
+  }
+
+  /* Mobile Carousel Enhancements (Placeholder - Requires JS interaction) */
+  .carousel-container {
+    position: relative; /* Needed for absolute positioning of indicator */
+  }
+
+  .swipe-indicator {
+    /* Example styling - implement if needed */
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    /* color: white; */
+    /* border-radius: 20px; */
+    /* padding: 5px 10px; */
+    /* font-size: 12px; */
+    /* opacity: 0.8; */
+    /* pointer-events: none; */
+    /* animation: fadeOut 2s forwards 1s; */
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; }
+   }
+}
+
+/* --- User Journey Optimization (Section 3.3) --- */
+
+/* Anchor Navigation */
+.anchor-nav {
+  /* position: sticky; */ /* Applied via Tailwind */
+  /* top: 4rem; */ /* Adjust based on main header height (h-16 = 4rem) */
+  /* background-color: white; */ /* Applied via Tailwind */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */ /* Applied via Tailwind */
+  /* padding: 10px 0; */ /* Padding handled by ul */
+  /* z-index: 30; */ /* Applied via Tailwind */
+}
+
+.anchor-nav ul {
+  /* display: flex; */ /* Applied via Tailwind */
+  /* justify-content: center; */ /* Applied via Tailwind */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.anchor-nav li {
+  /* margin: 0 15px; */ /* Spacing handled by Tailwind space-x */
+}
+
+.anchor-nav a {
+  /* color: #4a5568; */ /* Applied via Tailwind */
+  text-decoration: none;
+  /* font-weight: 500; */ /* Applied via Tailwind */
+  padding: 8px 4px; /* Adjusted padding */
+  position: relative;
+  display: inline-block; /* Ensure underline spans text only */
+  transition: color 0.2s ease; /* Smooth color transition */
+}
+
+.anchor-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-brand-gold); /* Use brand gold */
+  transition: width 0.3s ease;
+}
+
+.anchor-nav a:hover::after,
+.anchor-nav a.active::after {
+  width: 100%; /* Underline active/hover link */
+}
+
+.anchor-nav a.active {
+  color: var(--color-brand-navy); /* Darker color for active link */
+}
+
+
+/* Progress Indicator */
+.scroll-progress-container {
+  position: fixed;
+  top: 0; /* Position at the very top */
+  left: 0;
+  width: 100%;
+  height: 4px; /* Height of the progress bar */
+  background-color: transparent; /* Make container transparent */
+  z-index: 9999; /* Ensure it's absolutely on top */
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background-color: var(--color-brand-gold); /* Use brand gold */
+  width: 0%; /* Initial width */
+  transition: width 0.1s linear; /* Smooth transition */
+}
+
+
+/* --- Contextual WhatsApp CTA Styles (Section 3.3) --- */
+.contextual-cta {
+  background-color: #f8fafc; /* Tailwind gray-50 */
+  border: 1px solid #e2e8f0; /* Tailwind gray-200 */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 30px 0;
+}
+
+.contextual-cta h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: var(--color-brand-navy); /* Use brand navy */
+}
+
+.contextual-cta p {
+  margin-bottom: 15px;
+  color: #4a5568; /* Tailwind gray-700 */
+  font-size: 0.9rem; /* Slightly smaller text */
+}
+
+.contextual-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #25D366; /* WhatsApp green */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem; /* Match paragraph */
+  transition: background-color 0.2s ease;
+}
+
+.contextual-whatsapp-btn:hover {
+  background-color: #20bd5a; /* Darker green */
+}
+
+.contextual-whatsapp-btn svg {
+  margin-right: 8px;
+}
+
+
+/* --- Trust Signal Amplification Styles (Section 3.2) --- */
+
+/* Expandable Testimonial Section */
+.testimonial-container {
+  /* Basic container styling */
+  border: 1px solid var(--color-brand-gray);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.read-more-btn, .read-less-btn {
+  background: none;
+  border: none;
+  color: #3b82f6; /* Tailwind blue-600 */
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+.read-more-btn:hover, .read-less-btn:hover {
+  text-decoration: underline;
+}
+
+/* Animated Review Stars */
+.review-stars {
+  display: inline-flex;
+}
+
+.review-star {
+  color: #FFD700; /* Gold color */
+  margin-right: 2px;
+  /* Apply animation */
+  animation: twinkle 4s infinite;
+}
+
+/* Stagger animation delays */
+.review-star:nth-child(1) { animation-delay: 0.0s; }
+.review-star:nth-child(2) { animation-delay: 0.2s; }
+.review-star:nth-child(3) { animation-delay: 0.4s; }
+.review-star:nth-child(4) { animation-delay: 0.6s; }
+.review-star:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes twinkle {
+  0%, 40%, 100% { transform: scale(1); opacity: 1; }
+  20% { transform: scale(1.2); opacity: 0.9; }
+}
+
+/* Recent Contact Notification */
+/* Recent Contact Notification */
+.recent-contact-notification {
+  position: fixed;
+  bottom: 30px; /* Lowered significantly to avoid content overlap */
+  left: 30px; /* Keep in bottom-left corner */
+  background-color: white;
+  border-radius: 8px;
+  padding: 12px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  max-width: 250px;
+  z-index: 998; /* Below popup, above content */
+  transform: translateX(calc(-100% - 40px)); /* Start off-screen left */
+  transition: transform 0.5s ease;
+  color: #4a5568; /* Gray text */
+  pointer-events: none; /* Prevent interaction */
+}
+
+.recent-contact-notification.visible {
+  transform: translateX(0); /* Slide in */
+}
+
+/* Optional: Add arrow to notification */
+/* .recent-contact-notification::after { ... } */
+
+/* Online Badge */
+.online-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: #48BB78; /* Tailwind green-500 */
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.online-badge::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #48BB78;
+  margin-right: 4px;
+  /* Optional: Add subtle pulse */
+  /* animation: onlinePulse 2s infinite; */
+}
+
+@keyframes onlinePulse {
+  0% { box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.4); }
+  70% { box-shadow: 0 0 0 5px rgba(72, 187, 120, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(72, 187, 120, 0); }
+}
+
+/* Adjust reduced motion for new elements */
+@media (prefers-reduced-motion: reduce) {
+  .review-star,
+  .recent-contact-notification,
+  .online-badge::before {
+    animation: none !important;
+  }
+  .recent-contact-notification {
+    transition: none !important;
+    /* Keep it hidden if not initially visible */
+    /* transform: translateX(calc(100% + 40px)) !important; */
+  }
+}
+
+
+/* --- Visual Hierarchy Refinement (Section 1.2) --- */
+
+/* Text Contrast Enhancement */
+.section-heading {
+  /* Applied via Tailwind classes like text-brand-navy, font-bold etc. */
+  /* Add specific overrides if needed */
+  letter-spacing: -0.025em; /* Example refinement */
+}
+
+.section-subheading {
+   /* Applied via Tailwind classes like text-gray-700 etc. */
+   /* Add specific overrides if needed */
+}
+
+.body-text {
+  color: #4a5568; /* Tailwind gray-700 */
+  line-height: 1.7; /* Increased line height for readability */
+}
+
+/* Section Spacing & Dividers */
+.page-section {
+  /* padding: 4rem 0; */ /* Padding handled by Tailwind */
+  margin-bottom: 2rem; /* Add consistent bottom margin */
+  position: relative;
+}
+
+.page-section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem; /* Position divider between sections */
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  /* Subtle gradient divider */
+  background: linear-gradient(to right, transparent, rgba(203, 213, 224, 0.7), transparent);
+}
+
+/* Background Texture for Trust Section */
+.trust-section {
+  /* Applied to the container div within the trust section */
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f7fafc' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #f8fafc; /* Tailwind gray-50 */
+  border-radius: 8px;
+  padding: 2.5rem; /* Add padding */
+  margin: 3rem 0; /* Add vertical margin */
+}
+
+/* --- Image and Media Enhancements (Section 1.3) --- */
+
+/* Image Zoom Effect */
+.detail-image {
+  overflow: hidden; /* Ensure zoom stays within bounds */
+  border-radius: 6px; /* Match spec */
+}
+
+.detail-image img {
+  transition: transform 0.4s ease-out;
+  width: 100%; /* Ensure image fills container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove extra space below image */
+}
+
+.detail-image:hover img {
+  transform: scale(1.05); /* Subtle zoom */
+}
+
+/* Video Loop (Placeholder - requires video element) */
+.craftsman-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+/* --- Micro-Animations and Interactions (Section 2.2) --- */
+
+/* Enhanced WhatsApp Button Animation (Delay) */
+/* Note: Bounce animation already exists, delay added in this section */
+.whatsapp-button { /* Target the main button */
+  animation: bounce 3s infinite ease-in-out;
+  animation-delay: 5s !important; /* Add 5-second delay, use !important if needed */
+}
+
+/* Hover states for clickable elements */
+.clickable {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable:hover {
+  transform: translateY(-2px) scale(1.02); /* Lift and slightly enlarge */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+/* Tilt effect on service cards (Apply .service-card class in JSX) */
+.service-card {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: white;
+  height: 100%; /* Ensure cards in a grid align */
+}
+
+.service-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg); /* Subtle 3D tilt */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+/* Icon animations */
+.feature-icon {
+  transition: transform 0.3s ease;
+}
+
+.feature-icon.animated { /* Triggered by IntersectionObserver */
+  animation: iconPop 0.5s ease-out forwards;
+}
+
+@keyframes iconPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Feedback Mechanisms (Section 2.3) --- */
+
+/* Button ripple effect */
+.btn { /* Apply to buttons */
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5); /* White ripple */
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after { /* Ripple on focus/click */
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0) translate(-50%, -50%); /* Start small at center */
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40, 40) translate(-50%, -50%); /* Expand outwards */
+    opacity: 0;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading animation (Placeholder - use if needed for dynamic content) */
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3b82f6; /* Blue color */
+  animation: spin 1s ease-in-out infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Update reduced motion for new interactive elements */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important; /* Disable smooth scroll */
+  }
+  .clickable, .service-card, .btn::after, .loading-spinner, .feature-icon {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .clickable:hover, .service-card:hover {
+     box-shadow: none !important; /* Remove hover shadow */
+  }
+  /* Ensure feature icons are visible if animated */
+   .feature-icon.animated {
+     opacity: 1 !important;
+   }
 }

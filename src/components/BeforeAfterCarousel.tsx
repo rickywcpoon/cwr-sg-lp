@@ -5,6 +5,7 @@ import useEmblaCarousel, { UseEmblaCarouselType } from 'embla-carousel-react';
 import type { EmblaOptionsType } from 'embla-carousel';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image'; // Import next/image
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider'; // Import the new slider
 
 // Basic styling for the carousel - Adjusted button/icon sizes
 const carouselStyles = `
@@ -13,6 +14,7 @@ const carouselStyles = `
   }
   .embla__container {
     display: flex;
+    /* Removed CSS transition, rely on hook options */
   }
   .embla__slide {
     flex: 0 0 100%; /* Show one slide at a time */
@@ -34,21 +36,25 @@ const carouselStyles = `
     outline: 0;
     border: 0;
     width: 2.4rem;
-    height: 2.4rem;
+    height: 2.4rem; /* Keep overall clickable size */
     margin-right: 0.75rem;
     margin-left: 0.75rem;
     display: flex;
     align-items: center;
+    justify-content: center; /* Center the dot */
   }
   .embla__dot:after {
-    background-color: #e5e7eb; /* brand-gray */
-    width: 100%;
-    height: 0.3rem;
-    border-radius: 0.2rem;
+    /* Spec styles for the visual dot */
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(203, 213, 224, 0.5); /* Light gray, semi-transparent */
     content: '';
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transitions */
   }
   .embla__dot--selected:after {
-    background-color: #b48c5a; /* brand-gold */
+    background-color: #3b82f6; /* Blue color from spec */
+    transform: scale(1.2); /* Scale up active dot */
   }
   .embla__button { /* Adjusted styles for smaller, subtle buttons */
     outline: 0;
@@ -84,6 +90,14 @@ const carouselStyles = `
   .embla__button--next {
     right: 0.5rem; /* Closer to edge */
   }
+
+  /* Carousel Container styles from spec */
+  .carousel-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensure buttons are positioned relative to this */
+  }
 `;
 
 // Updated slide data: includes captions
@@ -99,11 +113,37 @@ const slidesData = [
 type SlideData = {
   image: string;
   alt: string;
-  caption: string; // Added caption field
+  caption: string;
 };
 
+// Define structure for combined slider slide
+type SliderSlide = {
+  type: 'slider';
+  before: SlideData;
+  after: SlideData;
+  combinedCaption: string;
+};
+
+// Define structure for regular image slide
+type ImageSlide = {
+  type: 'image';
+  data: SlideData;
+};
+
+// Union type for slides to render
+type RenderSlide = SliderSlide | ImageSlide;
+
+// Create the array of slides to render (Removed the first slider element containing Omega images)
+const slidesToRender: RenderSlide[] = [
+  // { type: 'slider', before: slidesData[0], after: slidesData[1], combinedCaption: 'Omega Seamaster: Before & After Restoration' }, // Removed this line
+  { type: 'image', data: slidesData[2] },
+  { type: 'image', data: slidesData[3] },
+  { type: 'image', data: slidesData[4] },
+];
+
+
 type PropType = {
-  slides?: SlideData[];
+  // slides prop is no longer used directly for rendering
   options?: EmblaOptionsType;
 };
 
@@ -143,8 +183,9 @@ const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
 
 
 const BeforeAfterCarousel: React.FC<PropType> = (props) => {
-  const { slides = slidesData, options } = props;
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, ...options });
+  const { options } = props; // Removed slides from props destructuring
+  // Trying speed option instead of duration for faster transition
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 10, ...options });
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -171,9 +212,10 @@ const BeforeAfterCarousel: React.FC<PropType> = (props) => {
   const onSelect = useCallback((emblaApi: UseEmblaCarouselType[1]) => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
-    setPrevBtnDisabled(slides.length <= 1);
-    setNextBtnDisabled(slides.length <= 1);
-  }, [slides.length]);
+    // Use slidesToRender.length for button disabling logic
+    setPrevBtnDisabled(slidesToRender.length <= 1);
+    setNextBtnDisabled(slidesToRender.length <= 1);
+  }, []); // Removed unnecessary dependency
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -188,31 +230,49 @@ const BeforeAfterCarousel: React.FC<PropType> = (props) => {
   return (
     <>
       <style>{carouselStyles}</style>
-      <div className="embla relative" ref={emblaRef}>
-         <div className="embla__container">
-           {slides.map((slide, index) => (
-             <div className="embla__slide" key={index}>
-                <div className="flex flex-col justify-center items-center h-[450px]"> {/* Changed to flex-col */}
-                  {/* Replaced img with next/image */}
-                  <Image
-                    src={slide.image}
-                    alt={slide.alt}
-                   width={600} // Provide estimated width for optimization
-                   height={400} // Provide estimated height for optimization
-                    className="max-h-[400px] w-auto object-contain rounded"
-                  />
-                  {/* Added Caption */}
-                  <p className="text-center text-sm text-gray-600 mt-2">{slide.caption}</p>
-                </div>
-             </div>
-           ))}
-         </div>
+      {/* Added carousel-container wrapper */}
+      <div className="carousel-container">
+        <div className="embla" ref={emblaRef}>
+           <div className="embla__container">
+             {/* Map over slidesToRender */}
+             {slidesToRender.map((slideInfo, index) => (
+               <div className="embla__slide" key={index}>
+                 <div className="flex flex-col justify-center items-center h-[450px]">
+                   {slideInfo.type === 'slider' ? (
+                     <>
+                       <ReactCompareSlider
+                         itemOne={<ReactCompareSliderImage src={slideInfo.before.image} alt={slideInfo.before.alt} />}
+                         itemTwo={<ReactCompareSliderImage src={slideInfo.after.image} alt={slideInfo.after.alt} />}
+                         style={{ height: '400px', width: '100%', borderRadius: '8px', maxWidth: '600px' }} // Added max-width
+                       />
+                       <p className="text-center text-sm text-gray-600 mt-2">{slideInfo.combinedCaption}</p>
+                     </>
+                   ) : (
+                     <>
+                       <Image
+                         src={slideInfo.data.image}
+                         alt={slideInfo.data.alt}
+                         width={600}
+                         height={400}
+                         className="max-h-[400px] w-auto object-contain rounded"
+                         placeholder="blur"
+                         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                       />
+                       <p className="text-center text-sm text-gray-600 mt-2">{slideInfo.data.caption}</p>
+                     </>
+                   )}
+                 </div>
+               </div>
+             ))}
+           </div>
 
-        <PrevButton onClick={scrollPrev} enabled={!prevBtnDisabled} />
-        <NextButton onClick={scrollNext} enabled={!nextBtnDisabled} />
-      </div>
+          <PrevButton onClick={scrollPrev} enabled={!prevBtnDisabled} />
+          <NextButton onClick={scrollNext} enabled={!nextBtnDisabled} />
+        </div>
+      </div> {/* End of carousel-container */}
 
       <div className="embla__dots">
+        {/* Use slidesToRender for dots */}
         {scrollSnaps.map((_, index) => (
           <button
             key={index}
