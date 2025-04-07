@@ -145,14 +145,15 @@ body {
 /* Timed Popup */
 .whatsapp-popup {
   position: fixed;
-  bottom: 100px; /* Position above the main button */
+  bottom: 110px; /* Position above the main button (moved up 10px) */
   right: 30px;
   width: 280px;
+  border: 1px solid #666; /* Added dark grey outline */
   background-color: white;
   border-radius: 10px;
   padding: 15px 40px 15px 15px; /* Increased right padding */
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  z-index: 999; /* Below main button but above content */
+  z-index: 1001; /* Above main button and all other content */
   transform: scale(0.9);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -192,7 +193,7 @@ body {
   bottom: 10px; /* Align near the bottom of the button */
   right: 70px; /* Position left of the button (60px width + 10px gap) */
   background-color: #f8fafc; /* Light background */
-  border: 1px solid #e2e8f0; /* Light border */
+  border: 1px solid #666; /* Changed to dark grey outline */
   border-radius: 20px;
   padding: 5px 10px;
   font-size: 12px;
@@ -1079,6 +1080,7 @@ html {
   transition: transform 0.5s ease;
   color: #4a5568; /* Gray text */
   pointer-events: none; /* Prevent interaction */
+  border: 1px solid #666; /* Changed to dark grey outline */
 }
 
 .recent-contact-notification.visible {

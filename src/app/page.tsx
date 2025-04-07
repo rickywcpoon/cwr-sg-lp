@@ -245,10 +245,10 @@ export default function Home() {
       // Initial shuffle
       shuffleArray(shuffledNotifications);
 
-      // Show the first notification after a 6-second delay
+      // Show the first notification after a 10-second delay
       const initialTimeoutId = setTimeout(() => {
         displayNextNotification(); // This will also schedule the next one via setInterval
-      }, 6000); // 6-second delay
+      }, 10000); // 10-second delay
 
       return () => {
         // Cleanup all timers on unmount
@@ -449,7 +449,7 @@ export default function Home() {
             {/* Removed the entire top logo block */}
             {/* Escaped Headline - Apply scroll animation & section-heading */}
             <h1 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in pt-8 md:pt-12"> {/* Added padding-top here */}
-              World-Renowned Expertise, Now in Singapore: Classic Watch Repair Restores What Others Refuse
+              World-Renowned Expertise, Now in Singapore: <br />Classic Watch Repair Restores What Others Refuse
             </h1>
             {/* Apply scroll animation & body-text */}
             <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
