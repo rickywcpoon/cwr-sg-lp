@@ -271,7 +271,20 @@ export default function Home() {
     };
   }, []); // Run once on mount
 
-  // Effect for Anchor Navigation Active State & Scroll Progress
+  // Throttle utility function
+  const throttle = (func: (...args: any[]) => void, limit: number) => {
+    let inThrottle: boolean;
+    return function(this: any, ...args: any[]) {
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  };
+
+  // Effect for Anchor Navigation Active State & Scroll Progress (with Throttling)
   useEffect(() => {
     const progressBar = document.querySelector('.scroll-progress-bar') as HTMLElement;
     const sections = document.querySelectorAll('section[id]');
@@ -312,6 +325,9 @@ export default function Home() {
       updateScrollProgress();
     };
 
+    // Throttle the scroll handler (e.g., run max once every 150ms)
+    const throttledScrollHandler = throttle(handleScroll, 150);
+
     // Smooth scroll for anchor links (if not handled by CSS)
     const initSmoothScroll = () => {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -333,12 +349,12 @@ export default function Home() {
     };
 
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', throttledScrollHandler); // Use throttled handler
     initSmoothScroll(); // Initialize smooth scroll
     handleScroll(); // Initial call to set state
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', throttledScrollHandler); // Remove throttled handler
       // Remove smooth scroll listeners if necessary (though usually not required)
     };
   }, []); // Run once on mount
@@ -428,27 +444,28 @@ export default function Home() {
         <section id="hero" className="page-section bg-gradient-to-b from-white to-brand-light pb-16 px-0 md:px-6 lg:px-12 xl:px-24 text-center">
           {/* Container for text content remains constrained */}
           <div className="container mx-auto max-w-4xl px-6 md:px-0"> {/* Added padding here for text on mobile */}
-            {/* Removed pt-[6px] */}
-            <div ref={topLogoRef} className="mb-8 flex justify-center pt-8 md:pt-0"> {/* Added padding top for mobile */}
-              {/* Added detail-image class */}
+            {/* Removed pt-[6px] and pt-8 md:pt-0 */}
+            {/* Revert parent div to just centering */}
+            <div ref={topLogoRef} className="mb-8 flex justify-center"> {/* Reverted to just centering */}
+              {/* Keep inner div if needed for other styles */}
               <div className="detail-image">
                 <Image
                   src="/logo_CWR_blk-top.png"
                   alt="Classic Watch Repair Logo"
-                  width={800} // Actual image width
-                  height={410} // Actual image height
-                  className="w-auto h-14 md:h-16" // Mobile: h-14 (~20% smaller than h-16), Desktop: h-16 (~35% smaller than original h-24)
+                  width={800} // Keep for optimization
+                  height={410} // Keep for optimization
+                  className="h-auto w-24 md:w-28" // Smaller intermediate size: w-24 (~96px) mobile, md:w-28 (~112px) desktop
                   priority // Add priority loading
                 />
               </div>
             </div>
             {/* Escaped Headline - Apply scroll animation & section-heading */}
             <h1 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in">
-              Restore Your Cherished Timepiece with Singapore's Trusted Classic Watch Specialists.
+              World-Renowned Expertise, Now in Singapore: Classic Watch Repair Restores What Others Refuse
             </h1>
             {/* Apply scroll animation & body-text */}
             <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
-              Experience meticulous care and seamless service for your vintage watch. We specialize in the complex repairs others decline.
+              From vintage Rolex to complex restorations, your treasured timepiece receives unparalleled care from Hong Kong's master craftsmen—now conveniently accessible in Singapore.
             </p>
             {/* Apply scroll animation & Add container for CTA and Badge - Stack vertically on mobile */}
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 animate-on-scroll fade-in" style={{ transitionDelay: '0.2s' }}>

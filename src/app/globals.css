@@ -322,8 +322,8 @@ body {
 /* Progressive reveal for process steps */
 .process-step {
   opacity: 0;
-  transform: translateX(-20px); /* Slide in from left */
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  /* transform: translateX(-20px); */ /* Removed slide-in transform */
+  transition: opacity 0.5s ease-out; /* Only transition opacity */
 }
 
 .process-step.animated {
@@ -557,14 +557,10 @@ body {
 }
 
 .feature-icon.animated { /* Triggered by IntersectionObserver */
-  animation: iconPop 0.5s ease-out forwards;
+  /* animation: iconPop 0.5s ease-out forwards; */ /* Removed pop animation, rely on fade-in */
 }
 
-@keyframes iconPop {
-  0% { transform: scale(0.8); opacity: 0; }
-  70% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
+/* @keyframes iconPop { ... } */ /* Removed keyframes */
 
 /* --- Feedback Mechanisms (Section 2.3) --- */
 
