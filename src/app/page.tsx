@@ -444,24 +444,10 @@ export default function Home() {
         <section id="hero" className="page-section bg-gradient-to-b from-white to-brand-light pb-16 px-0 md:px-6 lg:px-12 xl:px-24 text-center">
           {/* Container for text content remains constrained */}
           <div className="container mx-auto max-w-4xl px-6 md:px-0"> {/* Added padding here for text on mobile */}
-            {/* Removed pt-[6px] and pt-8 md:pt-0 */}
-            {/* Revert parent div to just centering */}
-            <div ref={topLogoRef} className="mb-8 flex justify-center"> {/* Reverted to just centering */}
-              {/* Keep inner div if needed for other styles */}
-              <div className="detail-image">
-                <Image
-                  src="/logo_CWR_blk-top.png"
-                  alt="Classic Watch Repair Logo"
-                  width={800} // Keep for optimization
-                  height={410} // Keep for optimization
-                  className="h-auto w-24 md:w-28" // Smaller intermediate size: w-24 (~96px) mobile, md:w-28 (~112px) desktop
-                  priority // Add priority loading
-                />
-              </div>
-            </div>
+            {/* Removed the entire top logo block */}
             {/* Escaped Headline - Apply scroll animation & section-heading */}
-            <h1 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in">
-              World-Renowned Expertise, Now in Singapore: Classic Watch Repair Restores What Others Refuse
+            <h1 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in pt-8 md:pt-12"> {/* Added padding-top here */}
+              World-Renowned Expertise, Now in Singapore: <br />Classic Watch Repair Restores What Others Refuse
             </h1>
             {/* Apply scroll animation & body-text */}
             <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
@@ -559,6 +545,16 @@ export default function Home() {
             <p className="body-text text-lg text-gray-700">
               Has your vintage timepiece been turned away by other service centers due to age or complexity? Our Hong Kong workshop, led by world-renowned experts, specializes in the intricate restorations others decline. Bring us the challenges others won't touch.
             </p>
+            {/* Add CWR Logo here */}
+            <div className="my-6 flex justify-center"> {/* Added margin top/bottom and centering */}
+              <Image
+                src="/logo_CWR_blk-top.png"
+                alt="Classic Watch Repair Logo"
+                width={800} // Keep for optimization
+                height={410} // Keep for optimization
+                className="h-auto w-32 md:w-36" // Apply requested size: w-32 mobile, md:w-36 desktop
+              />
+            </div>
             {/* Contextual CTA for Declined Repairs */}
             <div className="contextual-cta mt-6">
               {/* Added section-heading */}
