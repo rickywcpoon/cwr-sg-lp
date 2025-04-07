@@ -184,8 +184,8 @@ const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
 
 const BeforeAfterCarousel: React.FC<PropType> = (props) => {
   const { options } = props; // Removed slides from props destructuring
-  // Trying speed option instead of duration for faster transition
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 10, ...options });
+  // Removed invalid 'speed' option
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, ...options });
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
