@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-import Image from 'next/image'; // Use next/image within the slider if possible, or standard img
+// import Image from 'next/image'; // Removed unused import
 
 // Note: react-compare-slider might work best with standard <img> tags
 // If using next/image causes issues, revert to standard <img>

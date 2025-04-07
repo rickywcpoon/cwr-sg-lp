@@ -184,7 +184,7 @@ export default function Home() {
         'A watch enthusiast in Katong 🇸🇬 inquired about water resistance testing for their TAG Heuer.'
       ];
 
-      let shuffledNotifications = [...allNotifications]; // Copy the array
+      const shuffledNotifications = [...allNotifications]; // Copy the array, use const
       let currentIndex = 0;
       let notificationIntervalId: NodeJS.Timeout | null = null;
       let notificationHideTimeoutId: NodeJS.Timeout | null = null;
