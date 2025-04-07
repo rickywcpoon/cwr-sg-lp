@@ -1,6 +1,6 @@
 # Report: UI/UX Enhancements Implemented on `alt-visual-enhance` Branch
 
-**Date:** April 7, 2025
+**Date:** April 8, 2025
 **Purpose:** To document the changes implemented on the `alt-visual-enhance` branch compared to the state at the completion of Phase 3 (as documented in `pm_files/master_project_update.md`), referencing the goals outlined in `pm_files/ui_ux_enhancement_specifications.md`.
 
 ---
@@ -9,7 +9,7 @@
 
 The `alt-visual-enhance` branch incorporates numerous UI/UX improvements specified in the enhancement document, along with several iterative refinements based on subsequent feedback. Key changes include:
 
-*   **Hero Section:** Added animations, trust badge, and replaced static image with a video loop.
+*   **Hero Section:** Added animations, trust badge, replaced static image with a video loop, and removed the top logo.
 *   **Visual Hierarchy:** Refined section spacing, text styles, and added background texture to the Trust section.
 *   **Animations & Interactions:** Implemented scroll-triggered animations, hover effects (clickable elements, service cards, image zoom), and feedback mechanisms (button ripple, smooth scroll).
 *   **Conversion Optimization:** Enhanced the WhatsApp CTA button, added timed pop-ups/tooltips, social proof elements (badge, notifications), expandable testimonials, and contextual CTAs.
@@ -61,12 +61,12 @@ The `alt-visual-enhance` branch incorporates numerous UI/UX improvements specifi
 *   **3.1 WhatsApp CTA Enhancement:**
     *   **Prominent Button:** Implemented (`.whatsapp-button` styles).
     *   **Message Tooltip:** Implemented (`.whatsapp-tooltip` element and styles). JS logic updated for initial 6s delay, then every 30s.
-    *   **Timed Popup:** Implemented (`.whatsapp-popup` element and styles). JS logic implemented for 30s delay, session storage check, and close functionality.
-    *   **Social Proof Badge:** Implemented (`.social-proof-badge` element and styles). JS logic added to show/hide based on Recent Contact Notification timing (1.5s delay after notification hides, visible for 5s). CSS updated to hide by default.
+    *   **Timed Popup:** Implemented (`.whatsapp-popup` element and styles). JS logic implemented for 30s delay, session storage check, and close functionality. *Update (Apr 8):* `z-index` increased to `1001` to ensure it appears above the main WhatsApp button. Outline added and position adjusted slightly upwards.
+    *   **Social Proof Badge:** Implemented (`.social-proof-badge` element and styles). JS logic added to show/hide based on Recent Contact Notification timing (1.5s delay after notification hides, visible for 5s). CSS updated to hide by default. *Update (Apr 8):* Dark grey outline added.
 *   **3.2 Trust Signal Amplification:**
     *   **Expandable Testimonials:** Implemented (HTML structure with preview/full divs, JS logic in `page.tsx`).
     *   **Animated Review Stars:** Implemented (`.review-star` class with staggered `@keyframes twinkle`).
-    *   **Recent Contact Notification:** Implemented (`.recent-contact-notification` element and styles). JS logic updated with 10 Singapore-focused messages, shuffling, and 12-20 second random interval.
+    *   **Recent Contact Notification:** Implemented (`.recent-contact-notification` element and styles). JS logic updated with 10 Singapore-focused messages, shuffling, and 12-20 second random interval. *Update (Apr 8):* Initial delay increased from 6s to 10s. Dark grey outline added.
     *   **Online Badge:** Implemented (`.online-badge` element styled and added to final CTA).
 *   **3.3 User Journey Optimization:**
     *   **Anchor Navigation:** Implemented (Sticky `<nav>` with `.anchor-nav` class, active state highlighting via JS).
@@ -105,8 +105,11 @@ The `alt-visual-enhance` branch incorporates numerous UI/UX improvements specifi
 *   **Text/Styling Updates:**
     *   Process Step 3 heading changed from "(Specialist Hong Kong Workshop)" to "(Classic Watch Repair)" and styled consistently.
     *   Process Step headings restructured for two lines. Added ", SG" to NAXO detail.
-*   **Logo Adjustments:** Sizes adjusted and logos removed in the Guarantee section based on feedback.
-*   **Build Fixes:** Resolved ESLint errors (`prefer-const`, `no-unused-vars`), Next.js Image prop errors, and Embla Carousel hook options error. Added `nul` to `.gitignore`.
+    *   Hero headline updated to include a line break (`<br />`) before "Classic Watch Repair". *Update (Apr 8):* Added `whitespace-nowrap` span around "Now in Singapore:" to fix desktop orphan word. Reduced base mobile font size from `text-3xl` to `text-2xl` to fix resulting mobile orphan word.
+    *   "Band Restoration Magic" card description updated to include "Rolex Bracelet Magician" reference, 10k+ statistic, and global reach.
+*   **Logo Adjustments:** Sizes adjusted and logos removed in the Guarantee section. Top logo removed from Hero section. Logo added and sized (`w-32 md:w-36`) in Declined Repairs section.
+*   **Build Fixes:** Resolved ESLint errors (`prefer-const`, `no-unused-vars`, `no-explicit-any`, `prefer-spread`), Next.js Image prop errors, and Embla Carousel hook options error. Added `nul` to `.gitignore`. Refactored `throttle` function.
+*   **WhatsApp Element Styling:** Added dark grey outlines to popup, badge, and notification. Adjusted popup position and z-index.
 
 ---
 

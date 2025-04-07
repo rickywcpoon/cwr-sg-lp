@@ -448,8 +448,8 @@ export default function Home() {
           <div className="container mx-auto max-w-4xl px-6 md:px-0"> {/* Added padding here for text on mobile */}
             {/* Removed the entire top logo block */}
             {/* Escaped Headline - Apply scroll animation & section-heading */}
-            <h1 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in pt-8 md:pt-12"> {/* Added padding-top here */}
-              World-Renowned Expertise, Now in Singapore: <br />Classic Watch Repair Restores What Others Refuse
+            <h1 className="section-heading text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in pt-8 md:pt-12"> {/* Reduced mobile size to text-2xl */}
+              World-Renowned Expertise, <span className="whitespace-nowrap">Now in Singapore:</span> <br />Classic Watch Repair Restores What Others Refuse
             </h1>
             {/* Apply scroll animation & body-text */}
             <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
@@ -614,7 +614,7 @@ export default function Home() {
               <div className="service-card animate-on-scroll fade-in" style={{ transitionDelay: '0.3s' }}>
                 <Sparkles className="icon-block text-brand-gold feature-icon animate-on-scroll" aria-hidden="true" />
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">Band Restoration Magic</h3>
-                <p className="body-text text-gray-600 text-sm">Specialized techniques can revive worn or damaged bands.</p>
+                <p className="body-text text-gray-600 text-sm">Using 'Rolex Bracelet Magician' techniques, we've restored 10,000+ metal bracelets for delighted owners from 80+ countries, expertly reviving worn or damaged bands.</p>
               </div>
               {/* Applied service-card class */}
               <div className="service-card animate-on-scroll fade-in" style={{ transitionDelay: '0.4s' }}>
