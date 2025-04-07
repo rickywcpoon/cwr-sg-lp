@@ -271,15 +271,14 @@ export default function Home() {
     };
   }, []); // Run once on mount
 
-  // Throttle utility function with generics and arrow function
-  const throttle = <T extends (...args: any[]) => any>(func: T, limit: number) => {
+  // Throttle utility function with refined generics and spread operator
+  const throttle = <T extends (...args: unknown[]) => any>(func: T, limit: number) => { // Use unknown[]
     let inThrottle: boolean;
     let lastResult: ReturnType<T>; // Store the result type
 
-    return (...args: Parameters<T>): ReturnType<T> => { // Use arrow function and specify return type
+    return (...args: Parameters<T>): ReturnType<T> => { // Parameters<T> will infer unknown[]
       if (!inThrottle) {
-        // Pass null as 'this' context since the wrapped functions don't need it
-        lastResult = func.apply(null, args);
+        lastResult = func(...args); // Use spread operator instead of apply
         inThrottle = true;
         setTimeout(() => inThrottle = false, limit);
       }
