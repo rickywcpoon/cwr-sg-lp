@@ -272,13 +272,13 @@ export default function Home() {
   }, []); // Run once on mount
 
   // Throttle utility function with refined generics and spread operator
-  const throttle = <T extends (...args: unknown[]) => any>(func: T, limit: number) => { // Use unknown[]
+  const throttle = <T extends (...args: unknown[]) => unknown>(func: T, limit: number) => { // Use unknown[] and unknown return type
     let inThrottle: boolean;
     let lastResult: ReturnType<T>; // Store the result type
 
     return (...args: Parameters<T>): ReturnType<T> => { // Parameters<T> will infer unknown[]
       if (!inThrottle) {
-        lastResult = func(...args); // Use spread operator instead of apply
+        lastResult = func(...args) as ReturnType<T>; // Use spread operator and cast result
         inThrottle = true;
         setTimeout(() => inThrottle = false, limit);
       }
@@ -449,7 +449,7 @@ export default function Home() {
             {/* Removed the entire top logo block */}
             {/* Escaped Headline - Apply scroll animation & section-heading */}
             <h1 className="section-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in pt-8 md:pt-12"> {/* Added padding-top here */}
-              World-Renowned Expertise, Now in Singapore: <br />Classic Watch Repair Restores What Others Refuse
+              World-Renowned Expertise, Now in Singapore: Classic Watch Repair Restores What Others Refuse
             </h1>
             {/* Apply scroll animation & body-text */}
             <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
