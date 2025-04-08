@@ -9,7 +9,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"; // Import shadcn Carousel components
-import Autoplay from "embla-carousel-autoplay"; // Optional: Import Autoplay plugin if needed
 
 // Updated slide data: includes captions (Keep this structure)
 const slidesData = [
@@ -19,13 +18,6 @@ const slidesData = [
   { image: '/watch-band2-before-and-after.jpg', alt: 'Watch band 2 before and after restoration', caption: 'Vintage Bracelet: Before & After Laser Welding Repair' },
   { image: '/movement1-after.jpeg', alt: 'Watch movement after servicing', caption: 'Meticulously Serviced Movement' },
 ];
-
-// Define type for slide data
-type SlideData = {
-  image: string;
-  alt: string;
-  caption: string;
-};
 
 const BeforeAfterCarousel: React.FC = () => {
   // Optional: Setup Autoplay plugin instance
