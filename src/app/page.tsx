@@ -7,12 +7,15 @@ import {
 } from 'lucide-react'; // Added X icon for popup close
 import BeforeAfterCarousel from '@/components/BeforeAfterCarousel'; // Import the carousel
 import ImageCompareSliderComponent from '@/components/ImageCompareSlider'; // Import the new slider component
+import ImageModal from '@/components/ImageModal'; // Import the new ImageModal component
 
 export default function Home() {
   // State for header visibility
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   // State for WhatsApp popup visibility
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  // State for Google Reviews Image Modal visibility
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   // Refs for elements
   const topLogoRef = useRef<HTMLDivElement>(null); // Ref for the top logo container
   const headerRef = useRef<HTMLElement>(null); // Ref for the header
@@ -373,13 +376,13 @@ export default function Home() {
   };
 
 
-  const getCurrentYear = () => new Date().getFullYear();
+   const getCurrentYear = () => new Date().getFullYear();
 
-  // Updated Founder's Message for Barry (Shortened)
-  const founderMessage = `"As Managing Partner and a passionate collector, I learned from our founder, Michael Young. We know your watch holds history and personal value. With extensive experience across Asia and Europe, my commitment is to the transparent, expert service Classic Watch Repair is known for. Your watch is in trusted hands for any restoration or service. Reach out via WhatsApp to bring your timepiece back to its best."`;
+   // Updated Founder's Message for Barry (Shortened)
+   const founderMessage = `"As Managing Partner and a passionate collector, I learned from our founder, Michael Young (The Rolex Bracelet Magician). We know your watch holds history and personal value. With extensive experience across Asia and Europe, my commitment is to the transparent, expert service Classic Watch Repair is known for. Your watch is in trusted hands for any restoration or service. Reach out via WhatsApp to bring your timepiece back to its best."`;
 
-  // Testimonials (JS variable, quotes are fine here)
-  const testimonials = [
+   // Testimonials (JS variable, quotes are fine here)
+   const testimonials = [
     {
       quote: "I recently took my watch in for repair, and I couldn't be happier with the service I received. My watch had a broken ceramic bracelet, and the repair master did an outstanding job renewing it. Not only was he extremely professional, but he also charged a very reasonable price for the work done. I highly recommend this shop to anyone in need of watch repairs. Thank you for the excellent service!",
       author: "Gloria Wong"
@@ -461,7 +464,8 @@ export default function Home() {
                 <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
               </a>
               {/* Trust Badge - Added clickable, using Google Bubble Image with 5-star text - Show on mobile */}
-              <div className="trust-badge inline-flex clickable"> {/* Removed hidden md:inline-flex */}
+              {/* Added onClick handler */}
+              <div className="trust-badge inline-flex clickable cursor-pointer" onClick={() => setIsReviewModalOpen(true)}>
                 <Image
                   src="/google-bubble.png"
                   alt="Google Reviews icon"
@@ -763,15 +767,19 @@ export default function Home() {
                     backgroundPosition: 'center 25%', // Adjust vertical position
                   }}
                   role="img" // Add role for accessibility
-                  aria-label="Barry, Managing Partner at Classic Watch Repair" // Add label for accessibility
-                >
-                  {/* Removed Image component */}
-                </div>
-                <h3 className="font-semibold text-lg mb-2 text-brand-navy">A Message from Our Founder</h3>
-                <p className="body-text text-gray-600 italic">{founderMessage}</p>
-              </div>
+                   aria-label="Barry, Managing Partner at Classic Watch Repair" // Add label for accessibility
+                 >
+                   {/* Removed Image component */}
+                  </div>
+                  <p className="body-text text-gray-600 italic">
+                    {founderMessage}
+                    <br />
+                   <br />
+                   <span className="font-semibold not-italic">- Barry, Co-Founder, Classic Watch Repair</span>
+                 </p>
+               </div>
 
-              {/* Apply scroll animation */}
+               {/* Apply scroll animation */}
               <div className="space-y-6 md:col-span-2 lg:col-span-1 animate-on-scroll fade-in" style={{ transitionDelay: '0.2s' }}>
                 <h3 className="font-semibold text-xl mb-4 text-brand-navy text-center md:text-left">What Our Clients Say</h3>
                 {testimonials.map((testimonial, index) => (
@@ -805,7 +813,8 @@ export default function Home() {
                   </blockquote>
                 ))}
                 {/* Apply scroll animation */}
-                <div className="bg-white p-4 rounded-lg shadow flex items-center justify-center space-x-2 animate-on-scroll fade-in" style={{ transitionDelay: '0.3s' }}>
+                {/* Added onClick handler and cursor-pointer */}
+                <div className="bg-white p-4 rounded-lg shadow flex items-center justify-center space-x-2 animate-on-scroll fade-in clickable cursor-pointer" style={{ transitionDelay: '0.3s' }} onClick={() => setIsReviewModalOpen(true)}>
                   {/* Added detail-image class */}
                   <div className="detail-image">
                     <Image
@@ -1020,6 +1029,14 @@ export default function Home() {
       <div className="recent-contact-notification">
         {/* Content updated by JavaScript */}
       </div>
+
+      {/* Google Reviews Image Modal */}
+      <ImageModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        imageUrl="/google-reviews-grid.png"
+        altText="Grid of Google Reviews for Classic Watch Repair"
+      />
     </>
   );
 }
