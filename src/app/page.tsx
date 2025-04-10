@@ -472,6 +472,7 @@ export default function Home() {
                   width={24} // Corresponds to w-6
                   height={24} // Corresponds to h-6
                   className="w-6 h-6 mr-1" // Increased size
+                  priority // Add priority prop for eager loading
                 />
                 470+ 5⭐ Reviews {/* Kept 5-star text */}
               </div>

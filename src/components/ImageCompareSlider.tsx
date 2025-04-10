@@ -30,16 +30,16 @@ const ImageCompareSliderComponent: React.FC<ImageCompareSliderProps> = ({
             // If performance is an issue, consider optimizing images beforehand
             // Or explore if next/image can be styled correctly within this library
             // For now, prioritize functionality with standard img
-            // width={800} // Example width
-            // height={600} // Example height
+            width={1024} // Set width
+            height={1024} // Set height
           />
         }
         itemTwo={
           <ReactCompareSliderImage
             src={afterSrc} // Use prop
             alt={`${altPrefix} After Restoration`} // Use prop
-            // width={800}
-            // height={600}
+            width={1024} // Set width
+            height={1024} // Set height
           />
         }
         style={{ height: 'auto', maxHeight: '60vh', width: '100%' }} // Adjust height as needed

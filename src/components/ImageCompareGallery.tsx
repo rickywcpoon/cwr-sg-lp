@@ -9,22 +9,22 @@ const imagePairs = [
   {
     id: 'ap-polish-a',
     label: 'AP Polish Set 1',
-    before: '/ap-gold-polish-a-before.jpg',
-    after: '/ap-gold-polish-a-after.jpg',
+    before: '/ap-gold-polish-a-before.webp',
+    after: '/ap-gold-polish-a-after.webp',
     altPrefix: 'Audemars Piguet Gold Watch Polish A',
   },
   {
     id: 'ap-polish-b',
     label: 'AP Polish Set 2',
-    before: '/ap-gold-polish-b-before.jpg',
-    after: '/ap-gold-polish-b-after.jpg',
+    before: '/ap-gold-polish-b-before.webp',
+    after: '/ap-gold-polish-b-after.webp',
     altPrefix: 'Audemars Piguet Gold Watch Polish B',
   },
   {
     id: 'omega-mk2',
     label: 'Omega MkII',
-    before: '/omega-mark2-slide-before.jpg',
-    after: '/omega-mark2-slide-after.jpg',
+    before: '/omega-mark2-slide-before.webp',
+    after: '/omega-mark2-slide-after.webp',
     altPrefix: 'Omega Speedmaster Mark II',
   },
 ];
