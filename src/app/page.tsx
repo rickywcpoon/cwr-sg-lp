@@ -5,7 +5,6 @@ import Image from 'next/image'; // Import next/image
 import {
   Watch, Settings, Wrench, Sparkles, MessageSquareText, MapPin, CheckCircle, PackageCheck, ShieldCheck, MessageCircle, X
 } from 'lucide-react'; // Added X icon for popup close
-import BeforeAfterCarousel from '@/components/BeforeAfterCarousel'; // Import the carousel
 // import ImageCompareSliderComponent from '@/components/ImageCompareSlider'; // No longer needed here
 import ImageCompareGallery from '@/components/ImageCompareGallery'; // Import the new gallery component
 import ImageModal from '@/components/ImageModal'; // Import the new ImageModal component

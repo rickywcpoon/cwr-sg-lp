@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image'; // Import next/image
 import ImageCompareSliderComponent from './ImageCompareSlider'; // Import the modified slider
 
 // Data structure for the image pairs
@@ -57,10 +58,14 @@ const ImageCompareGallery = () => {
             }`}
             aria-label={`Select ${pair.label} comparison`}
           >
-            <img
+            <Image
               src={pair.after} // Use 'after' image for thumbnail
               alt={`Thumbnail for ${pair.label}`}
+              width={96} // Base width (sm:w-24)
+              height={80} // Base height (sm:h-20)
               className="w-20 h-16 sm:w-24 sm:h-20 object-cover" // Responsive thumbnail size
+              placeholder="blur" // Add blur placeholder
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" // Minimal blur placeholder
             />
             {/* Optional: Add a subtle overlay or checkmark for active state */}
             {/* {selectedIndex === index && (
