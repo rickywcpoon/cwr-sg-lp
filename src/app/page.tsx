@@ -649,7 +649,7 @@ export default function Home() {
               {/* Added detail-image class */}
               <div className="detail-image">
                 <Image
-                  src="/repair-detail-shot.jpg"
+                  src="/repair-detail-shot_converted.webp"
                   alt="Detailed view of intricate watch repair work in progress"
                   width={600}
                   height={400}
@@ -661,7 +661,7 @@ export default function Home() {
               {/* Added detail-image class */}
               <div className="detail-image">
                 <Image
-                  src="/band-before-after.jpeg"
+                  src="/band-before-after_converted.webp"
                   alt="Comparison showing a worn watch band before and after restoration"
                   width={600}
                   height={400}
@@ -705,7 +705,7 @@ export default function Home() {
                   <time className="block mb-2 text-sm font-normal leading-none text-gray-500 dark:text-gray-500">Step 2</time> {/* Removed ps-8 */}
                   <p className="body-text text-base font-normal text-gray-600 dark:text-gray-400">Bring your watch to our trusted local partner, NAXO Timepiece, at their convenient Tanjong Pagar, Singapore location. They ensure secure handling and logging.</p> {/* Removed ps-8 */}
                   <Image
-                    src="/naxo-logo.png"
+                    src="/naxo-logo_converted.webp"
                     alt="NAXO Timepiece Logo"
                     width={120}
                     height={40}
@@ -897,7 +897,7 @@ export default function Home() {
               {/* Added detail-image class */}
               <div className="detail-image">
                 <Image
-                  src="/brand-logos.jpeg"
+                  src="/brand-logos_converted.webp"
                   alt="Logos of luxury watch brands serviced, including Rolex, Omega, Patek Philippe, Audemars Piguet, and more"
                   width={1024}
                   height={150}
@@ -1044,7 +1044,7 @@ export default function Home() {
       <ImageModal
         isOpen={isReviewModalOpen}
         onClose={() => setIsReviewModalOpen(false)}
-        imageUrl="/google-reviews-grid.png"
+        imageUrl="/google-reviews-grid_converted.webp"
         altText="Grid of Google Reviews for Classic Watch Repair"
       />
     </>
