@@ -407,7 +407,7 @@ export default function Home() {
       >
         <div className="container mx-auto flex justify-center items-center h-full">
           <Image
-            src="/logo_CWR_blk_converted.webp"
+            src="/logo_CWR_blk.webp"
             alt="Classic Watch Repair Logo"
             width={128} // Keep width prop
             height={32} // Reinstate height prop
@@ -555,7 +555,7 @@ export default function Home() {
             {/* Add CWR Logo here */}
             <div className="my-6 flex justify-center"> {/* Added margin top/bottom and centering */}
               <Image
-                src="/logo_CWR_blk-top_converted.webp"
+                src="/logo_CWR_blk-top.webp"
                 alt="Classic Watch Repair Logo"
                 width={800} // Keep for optimization
                 height={410} // Keep for optimization
@@ -773,7 +773,7 @@ export default function Home() {
                 <div
                   className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('/founder-barry_converted.webp')",
+                    backgroundImage: "url('/founder-barry.webp')",
                     backgroundPosition: 'center 25%', // Adjust vertical position
                   }}
                   role="img" // Add role for accessibility
@@ -810,7 +810,7 @@ export default function Home() {
                     <footer className="flex items-center text-sm text-gray-500 mt-3"> {/* Added margin-top */}
                       {/* Replaced placeholder div with Image */}
                       <Image
-                        src={index === 0 ? "/gloria_wong_converted.webp" : "/ho-yuen-tsang_converted.webp"} // Conditional src
+                        src={index === 0 ? "/gloria_wong.webp" : "/ho-yuen-tsang.webp"} // Conditional src
                         alt={`Photo of ${testimonial.author}`} // Dynamic alt text
                         width={40} // Set width (e.g., w-10 = 40px)
                         height={40} // Set height (e.g., h-10 = 40px)
