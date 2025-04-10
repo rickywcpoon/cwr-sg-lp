@@ -1,0 +1,6 @@
+# Allow all crawlers access to all content
+User-agent: *
+Allow: /
+
+# Optional: Add sitemap location if one exists
+# Sitemap: https://www.classicwatchrepair.com/sitemap.xml

@@ -460,6 +460,7 @@ export default function Home() {
             </p>
             {/* REMOVED scroll animation & Add container for CTA and Badge - Stack vertically on mobile */}
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+              {/* Reverted text color back to white per user request */}
               <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
                 <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
               </a>
@@ -493,11 +494,19 @@ export default function Home() {
               height={1080} // Example height
               className="w-full object-cover md:rounded-lg md:shadow-lg" // Full width, cover aspect ratio, rounded/shadow on desktop
               preload="metadata" // Add preload hint
+              poster="/video-static-preview.webp" // Added poster image
               autoPlay
               loop
               muted
               playsInline
             >
+              {/* Add track for captions */}
+              <track
+                src="/watchmaker-at-work.vtt"
+                kind="captions"
+                srcLang="en"
+                label="English"
+              />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -768,23 +777,22 @@ export default function Home() {
             {/* Applied trust-section class */}
             <div className="trust-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
               {/* Apply scroll animation */}
+              {/* Refactored to use next/image */}
               <div className="bg-white p-6 rounded-lg shadow text-center md:col-span-2 lg:col-span-1 animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
-                {/* Changed image src, alt text, and ensured rounded-full for circular frame */}
-                {/* Removed detail-image class, using background image for better control */}
-                <div
-                  className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-cover bg-center"
-                  style={{
-                    backgroundImage: "url('/founder-barry.webp')",
-                    backgroundPosition: 'center 25%', // Adjust vertical position
-                  }}
-                  role="img" // Add role for accessibility
-                   aria-label="Barry, Managing Partner at Classic Watch Repair" // Add label for accessibility
-                 >
-                   {/* Removed Image component */}
-                  </div>
-                  <p className="body-text text-gray-600 italic">
-                    {founderMessage}
-                    <br />
+                <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                  <Image
+                    src="/founder-barry.webp"
+                    alt="Barry, Managing Partner at Classic Watch Repair"
+                    fill // Use fill to cover the container
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Example sizes, adjust as needed
+                    style={{ objectFit: 'cover', objectPosition: 'center 25%' }} // Mimic background-cover and position
+                    placeholder="blur" // Add blur placeholder
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" // Minimal blur placeholder
+                  />
+                </div>
+                <p className="body-text text-gray-600 italic">
+                  {founderMessage}
+                  <br />
                    <br />
                    <span className="font-semibold not-italic">- Barry, Co-Founder, Classic Watch Repair</span>
                  </p>
@@ -1024,9 +1032,10 @@ export default function Home() {
           <p className="text-sm mb-4">
             Our master watchmakers are available to answer your questions about your timepiece.
           </p>
+          {/* Changed text-white to text-black for contrast */}
           <a
             href="https://wa.me/85260616572"
-            className="block w-full bg-green-500 hover:bg-green-600 text-white text-center py-2 rounded-md"
+            className="block w-full bg-green-500 hover:bg-green-600 text-black text-center py-2 rounded-md"
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeWhatsAppPopup} // Close popup when link is clicked

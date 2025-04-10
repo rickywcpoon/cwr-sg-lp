@@ -1051,8 +1051,10 @@ html {
 .scroll-progress-bar {
   height: 100%;
   background-color: var(--color-brand-gold); /* Use brand gold */
-  width: 0%; /* Initial width */
-  transition: width 0.1s linear; /* Smooth transition */
+  width: 100%; /* Set width to 100% */
+  transform: scaleX(0); /* Initial scale */
+  transform-origin: left; /* Scale from the left */
+  transition: transform 0.1s linear; /* Transition transform instead of width */
 }
 
 /* --- Contextual WhatsApp CTA Styles (Section 3.3) --- */

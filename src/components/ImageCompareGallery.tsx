@@ -64,6 +64,7 @@ const ImageCompareGallery = () => {
               width={96} // Base width (sm:w-24)
               height={80} // Base height (sm:h-20)
               className="w-20 h-16 sm:w-24 sm:h-20 object-cover" // Responsive thumbnail size
+              sizes="(max-width: 640px) 80px, 96px" // Added sizes prop for thumbnails
               placeholder="blur" // Add blur placeholder
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" // Minimal blur placeholder
             />
