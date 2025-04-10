@@ -1,8 +1,7 @@
-"use client"; // Ensure it's a client component if not already implied
+"use client";
 
 import React from 'react';
-import Image from 'next/image'; // Import next/image
-import { ReactCompareSlider } from 'react-compare-slider'; // Only need the main slider component
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 
 // Define props interface
 interface ImageCompareSliderProps {
@@ -21,38 +20,29 @@ const ImageCompareSliderComponent: React.FC<ImageCompareSliderProps> = ({
 }) => {
   return (
     // Removed max-w-3xl and mx-auto for edge-to-edge mobile display
-    <div className="rounded-lg overflow-hidden shadow-lg relative" style={{ maxHeight: '60vh', width: '100%' }}> {/* Added relative positioning */}
+    <div className="rounded-lg overflow-hidden shadow-lg">
       <ReactCompareSlider
         itemOne={
-          // Wrap next/image in a div for the slider item
-          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <Image
-              src={beforeSrc}
-              alt={`${altPrefix} Before Restoration`}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw" // Adjust sizes as needed
-              style={{ objectFit: 'contain' }} // Or 'cover' depending on desired behavior
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-            />
-          </div>
+          <ReactCompareSliderImage
+            src={beforeSrc} // Use prop
+            alt={`${altPrefix} Before Restoration`} // Use prop
+            // Using standard img tag as next/image might conflict with slider positioning/sizing
+            // If performance is an issue, consider optimizing images beforehand
+            // Or explore if next/image can be styled correctly within this library
+            // For now, prioritize functionality with standard img
+            width={1024} // Set width
+            height={1024} // Set height
+          />
         }
         itemTwo={
-          // Wrap next/image in a div for the slider item
-          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <Image
-              src={afterSrc}
-              alt={`${altPrefix} After Restoration`}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw" // Adjust sizes as needed
-              style={{ objectFit: 'contain' }} // Or 'cover' depending on desired behavior
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-            />
-          </div>
+          <ReactCompareSliderImage
+            src={afterSrc} // Use prop
+            alt={`${altPrefix} After Restoration`} // Use prop
+            width={1024} // Set width
+            height={1024} // Set height
+          />
         }
-        // Apply styles directly to the outer container or manage via className
-        // style={{ height: 'auto', maxHeight: '60vh', width: '100%' }} // Removed from here
+        style={{ height: 'auto', maxHeight: '60vh', width: '100%' }} // Adjust height as needed
       />
     </div>
   );
