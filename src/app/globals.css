@@ -568,17 +568,6 @@ body.modal-open {
   position: relative;
 }
 
-.page-section:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  bottom: -1rem; /* Position divider between sections */
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  /* Subtle gradient divider */
-  background: linear-gradient(to right, transparent, rgba(203, 213, 224, 0.7), transparent);
-}
-
 /* Background Texture for Trust Section */
 .trust-section {
   /* Applied to the container div within the trust section */
@@ -1189,7 +1178,7 @@ html {
   display: inline-flex;
   align-items: center;
   font-size: 12px;
-  color: #48BB78; /* Tailwind green-500 */
+  color: #4ade80; /* Changed to lighter green (green-400) */
   margin-left: 8px;
   font-weight: 500;
 }
@@ -1200,7 +1189,7 @@ html {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #48BB78;
+  background-color: #4ade80; /* Changed to lighter green (green-400) */
   margin-right: 4px;
   /* Optional: Add subtle pulse */
   /* animation: onlinePulse 2s infinite; */
