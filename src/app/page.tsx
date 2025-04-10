@@ -450,16 +450,16 @@ export default function Home() {
           {/* Container for text content remains constrained */}
           <div className="container mx-auto max-w-4xl px-6 md:px-0"> {/* Added padding here for text on mobile */}
             {/* Removed the entire top logo block */}
-            {/* Escaped Headline - Apply scroll animation & section-heading */}
-            <h1 className="section-heading text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight animate-on-scroll fade-in pt-8 md:pt-12"> {/* Reduced mobile size to text-2xl */}
+            {/* Escaped Headline - REMOVED scroll animation & section-heading */}
+            <h1 className="section-heading text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight pt-8 md:pt-12"> {/* Reduced mobile size to text-2xl */}
               World-Renowned Expertise, <span className="whitespace-nowrap">Now in Singapore:</span> <br />Classic Watch Repair Restores What Others Refuse
             </h1>
-            {/* Apply scroll animation & body-text */}
-            <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
+            {/* REMOVED scroll animation & body-text */}
+            <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto">
               From vintage Rolex to complex restorations, your treasured timepiece receives unparalleled care from Hong Kong's master craftsmen—now conveniently accessible in Singapore.
             </p>
-            {/* Apply scroll animation & Add container for CTA and Badge - Stack vertically on mobile */}
-            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 animate-on-scroll fade-in" style={{ transitionDelay: '0.2s' }}>
+            {/* REMOVED scroll animation & Add container for CTA and Badge - Stack vertically on mobile */}
+            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
               <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
                 <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
               </a>
@@ -472,26 +472,27 @@ export default function Home() {
                   width={24} // Corresponds to w-6
                   height={24} // Corresponds to h-6
                   className="w-6 h-6 mr-1" // Increased size
-                  priority // Add priority prop for eager loading
+                  // Removed priority prop
                 />
                 470+ 5⭐ Reviews {/* Kept 5-star text */}
               </div>
             </div>
-            {/* Urgency Trigger */}
-            <p className="text-sm text-gray-500 mt-4 animate-on-scroll fade-in" style={{ transitionDelay: '0.3s' }}>
+            {/* Urgency Trigger - REMOVED scroll animation */}
+            <p className="text-sm text-gray-500 mt-4">
               Limited consultation slots available this week. Chat now!
             </p>
           </div> {/* Close text container */}
 
           {/* Video container - outside the text container for full width */}
-          {/* Apply scroll animation */}
-          <div className="mt-8 animate-on-scroll fade-in" style={{ transitionDelay: '0.4s' }}> {/* Adjusted margin and delay */}
+          {/* REMOVED scroll animation */}
+          <div className="mt-8"> {/* Adjusted margin and delay */}
             {/* Replaced Image with Video */}
             <video
               src="/watchmaker-at-work.mp4"
               width={1920} // Example width, aspect ratio maintained by object-cover
               height={1080} // Example height
               className="w-full object-cover md:rounded-lg md:shadow-lg" // Full width, cover aspect ratio, rounded/shadow on desktop
+              preload="metadata" // Add preload hint
               autoPlay
               loop
               muted
