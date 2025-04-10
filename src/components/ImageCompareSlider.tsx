@@ -2,19 +2,30 @@
 
 import React from 'react';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-// import Image from 'next/image'; // Removed unused import
+
+// Define props interface
+interface ImageCompareSliderProps {
+  beforeSrc: string;
+  afterSrc: string;
+  altPrefix: string;
+}
 
 // Note: react-compare-slider might work best with standard <img> tags
 // If using next/image causes issues, revert to standard <img>
 
-const ImageCompareSliderComponent = () => {
+const ImageCompareSliderComponent: React.FC<ImageCompareSliderProps> = ({
+  beforeSrc,
+  afterSrc,
+  altPrefix,
+}) => {
   return (
-    <div className="max-w-3xl mx-auto rounded-lg overflow-hidden shadow-lg">
+    // Removed max-w-3xl and mx-auto for edge-to-edge mobile display
+    <div className="rounded-lg overflow-hidden shadow-lg">
       <ReactCompareSlider
         itemOne={
           <ReactCompareSliderImage
-            src="/omega-before.jpg"
-            alt="Omega Speedmaster Before Restoration"
+            src={beforeSrc} // Use prop
+            alt={`${altPrefix} Before Restoration`} // Use prop
             // Using standard img tag as next/image might conflict with slider positioning/sizing
             // If performance is an issue, consider optimizing images beforehand
             // Or explore if next/image can be styled correctly within this library
@@ -25,8 +36,8 @@ const ImageCompareSliderComponent = () => {
         }
         itemTwo={
           <ReactCompareSliderImage
-            src="/omega-after.jpg"
-            alt="Omega Speedmaster After Restoration"
+            src={afterSrc} // Use prop
+            alt={`${altPrefix} After Restoration`} // Use prop
             // width={800}
             // height={600}
           />

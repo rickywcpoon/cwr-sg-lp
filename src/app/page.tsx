@@ -6,7 +6,8 @@ import {
   Watch, Settings, Wrench, Sparkles, MessageSquareText, MapPin, CheckCircle, PackageCheck, ShieldCheck, MessageCircle, X
 } from 'lucide-react'; // Added X icon for popup close
 import BeforeAfterCarousel from '@/components/BeforeAfterCarousel'; // Import the carousel
-import ImageCompareSliderComponent from '@/components/ImageCompareSlider'; // Import the new slider component
+// import ImageCompareSliderComponent from '@/components/ImageCompareSlider'; // No longer needed here
+import ImageCompareGallery from '@/components/ImageCompareGallery'; // Import the new gallery component
 import ImageModal from '@/components/ImageModal'; // Import the new ImageModal component
 
 export default function Home() {
@@ -558,7 +559,7 @@ export default function Home() {
                 alt="Classic Watch Repair Logo"
                 width={800} // Keep for optimization
                 height={410} // Keep for optimization
-                className="h-auto w-32 md:w-36" // Apply requested size: w-32 mobile, md:w-36 desktop
+                className="h-auto w-48 md:w-56" // Increased size by ~50%
               />
             </div>
             {/* Contextual CTA for Declined Repairs */}
@@ -574,30 +575,32 @@ export default function Home() {
         </section>
 
         {/* Renamed section for the Image Comparison Slider */}
-        <section id="before-after-slider" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-white">
-           <div className="container mx-auto max-w-4xl text-center">
+        {/* Removed px-6 for edge-to-edge mobile */}
+        <section id="before-after-slider" className="page-section py-16 md:px-12 lg:px-24 bg-white">
+           <div className="container mx-auto max-w-4xl text-center px-6 md:px-0"> {/* Added px-6 here for text content padding on mobile */}
              {/* Updated Heading */}
-             <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">See the Classic Watch Repair Magic: Before & After</h2>
-             {/* Apply scroll animation & Use the new Slider Component */}
-             <div className="animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
-               <ImageCompareSliderComponent />
-             </div>
-           </div>
-        </section>
+              <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">See the Classic Watch Repair Magic: Before & After</h2>
+              {/* Apply scroll animation & Use the new Gallery Component */}
+              {/* The gallery itself will handle its internal padding/margins */}
+              <div className="animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
+                <ImageCompareGallery /> {/* Use the new gallery component */}
+              </div>
+            </div>
+         </section>
 
-        {/* New section for the Carousel */}
-        <section id="more-restorations" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-brand-light"> {/* Use bg-brand-light like solution section */}
+        {/*
+        // New section for the Carousel - Commented out as requested
+        <section id="more-restorations" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-brand-light">
            <div className="container mx-auto max-w-4xl text-center">
-             {/* New Heading */}
              <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">More Beloved Pieces Restored</h2>
-             {/* Apply scroll animation & Use the modified Carousel Component */}
              <div className="animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
-               <BeforeAfterCarousel /> {/* Carousel now shows remaining images */}
+               <BeforeAfterCarousel />
              </div>
            </div>
         </section>
+        */}
 
-        <section id="solution" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-white"> {/* Changed back to bg-white */}
+        <section id="solution" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-brand-light"> {/* Changed to bg-brand-light */}
           <div className="container mx-auto max-w-4xl text-center">
             {/* Apply scroll animation & section-heading */}
             <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">Your Solution: Expert Craftsmanship That Brings Your Classic Watch Back to Life.</h2>
@@ -632,10 +635,17 @@ export default function Home() {
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">Transparent Process</h3>
                 <p className="body-text text-gray-600 text-sm">We keep you informed every step of the way.</p>
               </div>
-               <div className="hidden lg:block"></div> {/* Placeholder remains */}
+              {/* Added Free Consultation Card */}
+              <div className="service-card animate-on-scroll fade-in" style={{ transitionDelay: '0.6s' }}>
+                <MessageSquareText className="icon-block text-brand-gold feature-icon animate-on-scroll" aria-hidden="true" />
+                <h3 className="font-semibold text-lg mb-2 text-brand-navy">Free Consultation</h3>
+                <p className="body-text text-gray-600 text-sm">Discuss your watch via WhatsApp. No obligation, just expert advice.</p>
+              </div>
+              {/* Removed placeholder div as grid is now full */}
             </div>
             {/* Apply scroll animation */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll fade-in" style={{ transitionDelay: '0.6s' }}>
+            {/* Adjusted delay for the image grid below */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll fade-in" style={{ transitionDelay: '0.7s' }}>
               {/* Added detail-image class */}
               <div className="detail-image">
                 <Image
