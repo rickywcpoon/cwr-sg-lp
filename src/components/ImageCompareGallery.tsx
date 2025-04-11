@@ -6,26 +6,26 @@ import ImageCompareSliderComponent from './ImageCompareSlider'; // Import the mo
 
 // Data structure for the image pairs
 const imagePairs = [
-  {
-    id: 'ap-polish-a',
-    label: 'AP Polish Set 1',
-    before: '/ap-gold-polish-a-before.webp',
-    after: '/ap-gold-polish-a-after.webp',
-    altPrefix: 'Audemars Piguet Gold Watch Polish A',
+  { // Omega first
+    id: 'omega-mk2',
+    label: 'Omega MkII',
+    before: '/omega-mark2-slide-before.webp',
+    after: '/omega-mark2-slide-after.webp',
+    altPrefix: 'Omega Speedmaster Mark II',
   },
-  {
+  { // AP-b second
     id: 'ap-polish-b',
     label: 'AP Polish Set 2',
     before: '/ap-gold-polish-b-before.webp',
     after: '/ap-gold-polish-b-after.webp',
     altPrefix: 'Audemars Piguet Gold Watch Polish B',
   },
-  {
-    id: 'omega-mk2',
-    label: 'Omega MkII',
-    before: '/omega-mark2-slide-before.webp',
-    after: '/omega-mark2-slide-after.webp',
-    altPrefix: 'Omega Speedmaster Mark II',
+  { // AP-a third
+    id: 'ap-polish-a',
+    label: 'AP Polish Set 1',
+    before: '/ap-gold-polish-a-before.webp',
+    after: '/ap-gold-polish-a-after.webp',
+    altPrefix: 'Audemars Piguet Gold Watch Polish A',
   },
 ];
 
