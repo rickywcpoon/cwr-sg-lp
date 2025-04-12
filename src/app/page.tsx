@@ -549,12 +549,6 @@ export default function Home() {
                 <p className="body-text text-gray-600">We prioritize sourcing genuine or period-appropriate parts and always discuss options with you upfront. Your watch's integrity is our priority.</p>
               </div>
               {/* Apply scroll animation & clickable */}
-              <div className="bg-brand-light p-6 rounded-lg shadow animate-on-scroll fade-in clickable" style={{ transitionDelay: '0.5s' }}>
-                 {/* Escaped Text */}
-                 {/* Refined Benefit */}
-                <p className="body-text text-gray-600">Absolutely. Our meticulous process ensures your cherished timepiece is handled with the utmost care, returning it safer than when it left. We offer complete transparency and a solid warranty.</p>
-              </div>
-              {/* Apply scroll animation & clickable */}
               <div className="bg-brand-light p-6 rounded-lg shadow animate-on-scroll fade-in clickable" style={{ transitionDelay: '0.4s' }}>
                  {/* Escaped Text */}
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">"Are the replacement parts authentic?"</h3>
