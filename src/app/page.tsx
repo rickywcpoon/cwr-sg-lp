@@ -1,5 +1,20 @@
 "use client"; // Add this directive to make it a Client Component
 
+// Define a more specific type for dataLayer objects
+interface DataLayerObject {
+  event: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any; // Revert to any and disable eslint rule for this line
+}
+
+// Declare dataLayer on the window interface for TypeScript
+declare global {
+  interface Window {
+    // Use the specific interface array type
+    dataLayer: DataLayerObject[];
+  }
+}
+
 import React, { useState, useEffect, useRef } from 'react'; // Import hooks
 import Image from 'next/image'; // Import next/image
 import {
@@ -446,7 +461,7 @@ export default function Home() {
         {/* Added page-section */}
         {/* Removed pt-8 md:pt-16 */}
         {/* Adjusted padding for full-width mobile video */}
-        <section id="hero" className="page-section bg-gradient-to-b from-white to-brand-light pb-16 px-0 md:px-6 lg:px-12 xl:px-24 text-center">
+        <section id="hero" className="page-section bg-gradient-to-b from-white to-brand-light pb-8 md:pb-16 px-0 md:px-6 lg:px-12 xl:px-24 text-center"> {/* Reduced mobile padding-bottom */}
           {/* Container for text content remains constrained */}
           <div className="container mx-auto max-w-4xl px-6 md:px-0"> {/* Added padding here for text on mobile */}
             {/* Removed the entire top logo block */}
@@ -1008,6 +1023,11 @@ export default function Home() {
         rel="noopener noreferrer"
         className="whatsapp-button relative" // Use new class, add relative for positioning children
         aria-label="Chat on WhatsApp"
+        onClick={() => {
+          // Ensure dataLayer exists before pushing
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'whatsapp_cta_click' });
+        }}
       >
         {/* WhatsApp Icon */}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-white"> {/* Adjusted size */}
