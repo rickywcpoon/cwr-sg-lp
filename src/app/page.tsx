@@ -450,22 +450,8 @@ export default function Home() {
           {/* Container for text content remains constrained */}
           <div className="container mx-auto max-w-4xl px-6 md:px-0"> {/* Added padding here for text on mobile */}
             {/* Removed the entire top logo block */}
-            {/* Escaped Headline - REMOVED scroll animation & section-heading */}
-            <h1 className="section-heading text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight pt-8 md:pt-12"> {/* Reduced mobile size to text-2xl */}
-              World-Renowned Expertise, <span className="whitespace-nowrap">Now in Singapore:</span> <br />Classic Watch Repair Restores What Others Refuse
-            </h1>
-            {/* REMOVED scroll animation & body-text */}
-            <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto">
-              From vintage Rolex to complex restorations, your treasured timepiece receives unparalleled care from Hong Kong's master craftsmen—now conveniently accessible in Singapore.
-            </p>
-            {/* REMOVED scroll animation & Add container for CTA and Badge - Stack vertically on mobile */}
-            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-              {/* Reverted text color back to white per user request */}
-              <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
-                <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
-              </a>
-              {/* Trust Badge - Added clickable, using Google Bubble Image with 5-star text - Show on mobile */}
-              {/* Added onClick handler */}
+            {/* Trust Badge - Moved above H1 */}
+            <div className="flex justify-center mb-4"> {/* Wrapper for centering */}
               <div className="trust-badge inline-flex clickable cursor-pointer" onClick={() => setIsReviewModalOpen(true)}>
                 <Image
                   src="/google-bubble.png"
@@ -477,6 +463,22 @@ export default function Home() {
                 />
                 470+ 5⭐ Reviews {/* Kept 5-star text */}
               </div>
+            </div>
+            {/* Escaped Headline - REMOVED scroll animation & section-heading */}
+            <h1 className="section-heading text-2xl md:text-4xl lg:text-5xl font-bold mb-4 text-brand-navy leading-tight pt-8 md:pt-12"> {/* Reduced mobile size to text-2xl */}
+              World-Renowned Expertise, <span className="whitespace-nowrap">Now in Singapore:</span> <br />Classic Watch Repair Restores What Others Refuse
+            </h1>
+            {/* REMOVED scroll animation & body-text */}
+            <p className="body-text text-lg md:text-xl mb-8 text-gray-700 max-w-2xl mx-auto">
+              From vintage Rolex to complex restorations, your treasured timepiece receives unparalleled care from Hong Kong's master craftsmen—now conveniently accessible in Singapore.
+            </p>
+            {/* REMOVED scroll animation & Add container for CTA - Badge moved */}
+            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+              {/* Reverted text color back to white per user request */}
+              <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
+                <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
+              </a>
+              {/* Trust Badge moved above H1 */}
             </div>
             {/* Urgency Trigger - REMOVED scroll animation */}
             <p className="text-sm text-gray-500 mt-4">
@@ -514,8 +516,11 @@ export default function Home() {
 
         <section id="concerns" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-white">
           <div className="container mx-auto max-w-4xl text-center">
-            {/* Escaped Headline - Apply scroll animation & section-heading */}
-            <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">Worried About Your Vintage Watch Repair? You're Not Alone.</h2>
+            {/* Escaped Headline - Apply scroll animation & section-heading - Updated for mobile */}
+            <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">
+              <span className="inline md:hidden">Worried About Your Vintage Watch Repair?</span>
+              <span className="hidden md:inline">Worried About Your Vintage Watch Repair? You're Not Alone.</span>
+            </h2>
             {/* Apply scroll animation & body-text */}
             <p className="body-text text-lg mb-12 text-gray-700 animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>We know the anxieties that come with finding the right care for an irreplaceable timepiece.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
@@ -526,8 +531,8 @@ export default function Home() {
                 {/* Refined Benefit */}
                 <p className="body-text text-gray-600">Our passion *is* classic and vintage watches. We possess the specialized knowledge required for older, intricate movements.</p>
               </div>
-              {/* Apply scroll animation & clickable */}
-              <div className="bg-brand-light p-6 rounded-lg shadow animate-on-scroll fade-in clickable" style={{ transitionDelay: '0.3s' }}>
+              {/* Apply scroll animation & clickable - Hidden on mobile */}
+              <div className="bg-brand-light p-6 rounded-lg shadow animate-on-scroll fade-in clickable hidden md:block" style={{ transitionDelay: '0.3s' }}>
                  {/* Escaped Text */}
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">"Can I trust them with something so valuable?"</h3>
                  {/* Refined Benefit */}
@@ -612,8 +617,11 @@ export default function Home() {
 
         <section id="solution" className="page-section py-16 px-6 md:px-12 lg:px-24 bg-brand-light"> {/* Changed to bg-brand-light */}
           <div className="container mx-auto max-w-4xl text-center">
-            {/* Apply scroll animation & section-heading */}
-            <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">Your Solution: Expert Craftsmanship That Brings Your Classic Watch Back to Life.</h2>
+            {/* Apply scroll animation & section-heading - Updated for mobile */}
+            <h2 className="section-heading text-2xl md:text-3xl font-bold mb-8 text-brand-navy animate-on-scroll fade-in">
+              <span className="inline md:hidden">Bring Your Classic Watch Back to Life With Expert Craftsmanship</span>
+              <span className="hidden md:inline">Your Solution: Expert Craftsmanship That Brings Your Classic Watch Back to Life.</span>
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mb-12">
               {/* Applied service-card class */}
               <div className="service-card animate-on-scroll fade-in" style={{ transitionDelay: '0.1s' }}>
@@ -633,14 +641,14 @@ export default function Home() {
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">Band Restoration Magic</h3>
                 <p className="body-text text-gray-600 text-sm">Using 'Rolex Bracelet Magician' techniques, we've restored 10,000+ metal bracelets for delighted owners from 80+ countries, expertly reviving worn or damaged bands.</p>
               </div>
-              {/* Applied service-card class */}
-              <div className="service-card animate-on-scroll fade-in" style={{ transitionDelay: '0.4s' }}>
+              {/* Applied service-card class - Hidden on mobile */}
+              <div className="service-card animate-on-scroll fade-in hidden md:block" style={{ transitionDelay: '0.4s' }}>
                 <Settings className="icon-block text-brand-gold feature-icon animate-on-scroll" aria-hidden="true" />
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">Meticulous Servicing</h3>
                 <p className="body-text text-gray-600 text-sm">Comprehensive cleaning, oiling, and regulation to restore accuracy.</p>
               </div>
-              {/* Applied service-card class */}
-               <div className="service-card animate-on-scroll fade-in" style={{ transitionDelay: '0.5s' }}>
+              {/* Applied service-card class - Hidden on mobile */}
+               <div className="service-card animate-on-scroll fade-in hidden md:block" style={{ transitionDelay: '0.5s' }}>
                 <MessageSquareText className="icon-block text-brand-gold feature-icon animate-on-scroll" aria-hidden="true" />
                 <h3 className="font-semibold text-lg mb-2 text-brand-navy">Transparent Process</h3>
                 <p className="body-text text-gray-600 text-sm">We keep you informed every step of the way.</p>
