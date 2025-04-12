@@ -497,8 +497,9 @@ export default function Home() {
               width={1920} // Example width, aspect ratio maintained by object-cover
               height={1080} // Example height
               className="w-full object-cover md:rounded-lg md:shadow-lg" // Full width, cover aspect ratio, rounded/shadow on desktop
-              preload="metadata" // Add preload hint
+              preload="auto" // Changed from metadata to auto
               poster="/video-static-preview.webp" // Added poster image
+              fetchpriority="high" // Added fetchpriority
               autoPlay
               loop
               muted
