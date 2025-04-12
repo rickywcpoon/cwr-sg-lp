@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    dataLayer: any[]; // Declares dataLayer on the window object
+    dataLayer: Record<string, any>[]; // More specific type for dataLayer
   }
 }
 
