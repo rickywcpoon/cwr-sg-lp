@@ -39,6 +39,8 @@ export default function RootLayout({
         {/* End Google Tag Manager */}
         {/* Preconnect to WhatsApp domain */}
         <link rel="preconnect" href="https://wa.me" />
+        {/* Preload the video poster image */}
+        <link rel="preload" as="image" href="/video-static-preview.webp" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

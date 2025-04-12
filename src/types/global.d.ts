@@ -1,6 +1,7 @@
 declare global {
   interface Window {
-    dataLayer: Record<string, any>[]; // More specific type for dataLayer
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dataLayer: Record<string, any>[]; // Disable explicit any rule for dataLayer
   }
 }
 
