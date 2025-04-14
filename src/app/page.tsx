@@ -499,7 +499,7 @@ export default function Home() {
               className="w-full object-cover md:rounded-lg md:shadow-lg" // Full width, cover aspect ratio, rounded/shadow on desktop
               preload="auto" // Changed from metadata to auto
               poster="/video-static-preview.webp" // Added poster image
-              fetchPriority="high" // Added fetchPriority
+              fetchpriority="high" // Added fetchPriority
               autoPlay
               loop
               muted
