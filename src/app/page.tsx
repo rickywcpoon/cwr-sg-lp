@@ -494,12 +494,12 @@ export default function Home() {
             {/* Replaced Image with Video */}
             <video
               src="/watchmaker-at-work.mp4"
-              width={1024} // Example width, aspect ratio maintained by object-cover
-              height={562} // Example height
-              className="w-full object-cover" // Full width, cover aspect ratio, rounded/shadow on desktop
-              preload="metadata" // Changed from metadata to auto
-              poster="/video-static-preview.webp" // Added poster image
-              fetchpriority="high" // Added fetchPriority
+              width={1024}
+              height={562}
+              className="w-full object-cover"
+              preload="none"
+              poster="/video-static-preview.webp"
+              fetchpriority="high"
               autoPlay
               loop
               muted
