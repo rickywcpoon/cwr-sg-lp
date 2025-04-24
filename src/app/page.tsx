@@ -399,12 +399,12 @@ export default function Home() {
     return () => clearTimeout(mainTimeoutId);
   }, []); // Run once on mount
 
-  // Effect to load video shortly after component mounts - INCREASE DELAY
+  // Effect to load video shortly after component mounts - ADJUST DELAY
   useEffect(() => {
-    // Significantly delay video load
+    // Delay video load - reduced to 1 second
     const timer = setTimeout(() => {
       setShouldLoadVideo(true);
-    }, 7000); // Load video after 7 seconds (adjust as needed)
+    }, 1000); // Load video after 1 second (changed from 7000)
 
     return () => clearTimeout(timer); // Cleanup timer
   }, []);
