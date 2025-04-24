@@ -5,7 +5,7 @@
 import React, { useState, useEffect, useRef } from 'react'; // Import hooks
 import Image from 'next/image'; // Import next/image
 import {
-  Watch, Settings, Wrench, Sparkles, MessageSquareText, MapPin, CheckCircle, PackageCheck, ShieldCheck, MessageCircle, X
+  Watch, Settings, Wrench, Sparkles, MessageSquareText, MapPin, CheckCircle, PackageCheck, ShieldCheck, MessageCircle, X, PlayCircle
 } from 'lucide-react'; // Added X icon for popup close
 // import ImageCompareSliderComponent from '@/components/ImageCompareSlider'; // No longer needed here
 import ImageCompareGallery from '@/components/ImageCompareGallery'; // Import the new gallery component
@@ -18,6 +18,8 @@ export default function Home() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   // State for Google Reviews Image Modal visibility
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  // State to control video loading/visibility
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   // Refs for elements
   const topLogoRef = useRef<HTMLDivElement>(null); // Ref for the top logo container
   const headerRef = useRef<HTMLElement>(null); // Ref for the header
@@ -395,6 +397,17 @@ export default function Home() {
     }
   ];
 
+  // Effect to load video shortly after component mounts (can be refined later)
+  useEffect(() => {
+    // Simple delay to load video after initial render/mount - improves LCP
+    // Can be replaced with interaction-based trigger later
+    const timer = setTimeout(() => {
+      setShouldLoadVideo(true);
+    }, 2500); // Load video after 2.5 seconds
+
+    return () => clearTimeout(timer); // Cleanup timer
+  }, []);
+
   return (
     <>
       {/* Added mobile-header class for targeting, removed h-0/h-16 transition */}
@@ -477,7 +490,7 @@ export default function Home() {
             {/* REMOVED scroll animation & Add container for CTA - Badge moved */}
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
               {/* Reverted text color back to white per user request */}
-              <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
+              <a href="https://wa.me/6589038755" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
                 <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
               </a>
               {/* Trust Badge moved above H1 */}
@@ -490,30 +503,47 @@ export default function Home() {
 
           {/* Video container - outside the text container for full width */}
           {/* REMOVED scroll animation */}
-          <div className="mt-8"> {/* Adjusted margin and delay */}
-            {/* Replaced Image with Video */}
-            <video
-              src="/watchmaker-at-work.mp4"
-              width={1024}
-              height={562}
-              className="w-full object-cover"
-              preload="none"
-              poster="/video-static-preview.webp"
-              fetchpriority="high"
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              {/* Add track for captions */}
-              <track
-                src="/watchmaker-at-work.vtt"
-                kind="captions"
-                srcLang="en"
-                label="English"
+          {/* Conditionally render Image (LCP) or Video */}
+          <div className="mt-8 relative"> {/* Added relative positioning for potential play button overlay later */}
+            {!shouldLoadVideo && (
+              <Image
+                src="/video-static-preview.webp"
+                alt="Watchmaker working on a classic watch movement" // More descriptive alt text
+                width={1024}
+                height={562}
+                className="w-full object-cover"
+                priority // Prioritize loading this image for LCP
+                // Consider adding placeholder="blur" if you have a low-res version
               />
-              Your browser does not support the video tag.
-            </video>
+              // Optional: Add a Play button overlay here later
+              // <button onClick={() => setShouldLoadVideo(true)} className="absolute inset-0 flex items-center justify-center">
+              //   <PlayCircle size={80} className="text-white opacity-80 hover:opacity-100 transition-opacity" />
+              // </button>
+            )}
+            {shouldLoadVideo && (
+              <video
+                src="/watchmaker-at-work.mp4"
+                width={1024}
+                height={562}
+                className="w-full object-cover"
+                // preload="auto" // Let browser decide when video is loaded
+                poster="/video-static-preview.webp" // Keep poster for transition
+                // fetchpriority="high" // Lower priority now, LCP is the image
+                autoPlay // Autoplay when rendered
+                loop
+                muted
+                playsInline
+              >
+                {/* Add track for captions */}
+                <track
+                  src="/watchmaker-at-work.vtt"
+                  kind="captions"
+                  srcLang="en"
+                  label="English"
+                />
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </section>
 
@@ -585,7 +615,7 @@ export default function Home() {
               {/* Added section-heading */}
               <h4 className="section-heading text-lg font-semibold mb-1">Watch Repair Declined Elsewhere?</h4>
               <p className="text-sm mb-3">Let our specialists take a look. We often succeed where others can't.</p>
-              <a href="https://wa.me/85260616572?text=My%20watch%20repair%20was%20declined%20elsewhere,%20can%20you%20help?" className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
+              <a href="https://wa.me/6589038755?text=My%20watch%20repair%20was%20declined%20elsewhere,%20can%20you%20help?" className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
                 <MessageCircle className="w-4 h-4 mr-2" /> Chat About Declined Repair
               </a>
             </div>
@@ -774,7 +804,7 @@ export default function Home() {
               {/* Added section-heading */}
               <h4 className="section-heading text-lg font-semibold mb-1">Questions About the Process?</h4>
               <p className="text-sm mb-3">We're happy to clarify how our secure drop-off and repair system works.</p>
-              <a href="https://wa.me/85260616572?text=I%20have%20a%20question%20about%20the%20repair%20process." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
+              <a href="https://wa.me/6589038755?text=I%20have%20a%20question%20about%20the%20repair%20process." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
                 <MessageCircle className="w-4 h-4 mr-2" /> Ask About the Process
               </a>
             </div>
@@ -905,7 +935,7 @@ export default function Home() {
               {/* Added section-heading */}
               <h4 className="section-heading text-lg font-semibold mb-1">Need Assurance for Your Valuable Watch?</h4>
               <p className="text-sm mb-3">Chat with us about our secure handling, warranty, and expertise.</p>
-              <a href="https://wa.me/85260616572?text=I'd%20like%20to%20know%20more%20about%20your%20guarantees%20and%20expertise." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
+              <a href="https://wa.me/6589038755?text=I'd%20like%20to%20know%20more%20about%20your%20guarantees%20and%20expertise." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
                 <MessageCircle className="w-4 h-4 mr-2" /> Discuss Your Watch Concerns
               </a>
             </div>
@@ -956,7 +986,7 @@ export default function Home() {
               Don't let your treasured timepiece sit idle. Connect with a Classic Watch Repair specialist today for expert advice and a no-obligation consultation. Experience the difference dedicated craftsmanship makes.
             </p>
             {/* Apply scroll animation */}
-            <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 mb-4 animate-on-scroll fade-in btn clickable" style={{ transitionDelay: '0.2s' }}> {/* Added clickable */}
+            <a href="https://wa.me/6589038755" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 mb-4 animate-on-scroll fade-in btn clickable" style={{ transitionDelay: '0.2s' }}> {/* Added clickable */}
               <MessageCircle className="w-4 h-4 mr-2" /> Chat on WhatsApp
               <span className="online-badge">Online Now</span> {/* Added Online Badge */}
             </a>
@@ -1006,7 +1036,7 @@ export default function Home() {
 
       <a
         id="whatsapp-cta"
-        href="https://wa.me/85260616572"
+        href="https://wa.me/6589038755"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-button relative" // Use new class, add relative for positioning children
@@ -1050,7 +1080,7 @@ export default function Home() {
           </p>
           {/* Changed text-white to text-black for contrast */}
           <a
-            href="https://wa.me/85260616572"
+            href="https://wa.me/6589038755"
             className="block w-full bg-green-500 hover:bg-green-600 text-black text-center py-2 rounded-md"
             target="_blank"
             rel="noopener noreferrer"
