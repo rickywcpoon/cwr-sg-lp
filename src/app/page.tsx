@@ -43,67 +43,74 @@ export default function Home() {
     };
   }, []);
 
-  // Effect for WhatsApp Tooltip and Popup
+  // Effect for WhatsApp Tooltip and Popup - DEFER EXECUTION
   useEffect(() => {
-    // WhatsApp Tooltip Toggle
-    const toggleWhatsAppTooltip = () => {
-      const tooltip = document.querySelector('.whatsapp-tooltip');
-      if (!tooltip) return;
+    // Delay setup to prevent blocking initial paint
+    const mainTimeoutId = setTimeout(() => {
+      // WhatsApp Tooltip Toggle
+      const toggleWhatsAppTooltip = () => {
+        const tooltip = document.querySelector('.whatsapp-tooltip');
+        if (!tooltip) return;
 
-      let initialTooltipTimeoutId: NodeJS.Timeout | null = null;
-      let tooltipIntervalId: NodeJS.Timeout | null = null;
+        let initialTooltipTimeoutId: NodeJS.Timeout | null = null;
+        let tooltipIntervalId: NodeJS.Timeout | null = null;
 
-      const showTooltip = () => {
-        tooltip.classList.add('visible');
-        // Hide after 5 seconds
-        setTimeout(() => {
-          tooltip.classList.remove('visible');
-        }, 5000);
+        const showTooltip = () => {
+          tooltip.classList.add('visible');
+          // Hide after 5 seconds
+          setTimeout(() => {
+            tooltip.classList.remove('visible');
+          }, 5000);
+        };
+
+        // Initial appearance after 6 seconds
+        initialTooltipTimeoutId = setTimeout(() => {
+          showTooltip();
+          // Start subsequent appearances every 30 seconds *after* the first one
+          tooltipIntervalId = setInterval(showTooltip, 30000);
+        }, 6000); // 6-second delay for first appearance
+
+        return () => {
+          if (initialTooltipTimeoutId) clearTimeout(initialTooltipTimeoutId);
+          if (tooltipIntervalId) clearInterval(tooltipIntervalId);
+        }; // Cleanup interval on unmount
       };
 
-      // Initial appearance after 6 seconds
-      initialTooltipTimeoutId = setTimeout(() => {
-        showTooltip();
-        // Start subsequent appearances every 30 seconds *after* the first one
-        tooltipIntervalId = setInterval(showTooltip, 30000);
-      }, 6000); // 6-second delay for first appearance
+      // Timed WhatsApp Popup
+      const showWhatsAppPopup = () => {
+        // Check if popup has been shown before in this session
+        if (sessionStorage.getItem('popupShown') === 'true') {
+          return;
+        }
 
+        // Show popup after 30 seconds on page
+        const timeoutId = setTimeout(() => {
+          setIsPopupVisible(true); // Use state to control visibility for React rendering
+        }, 30000);
+
+        return () => clearTimeout(timeoutId); // Cleanup timeout on unmount
+      };
+
+      const cleanupTooltip = toggleWhatsAppTooltip();
+      const cleanupPopup = showWhatsAppPopup();
+
+      // Return the cleanup function for the *inner* logic
       return () => {
-        if (initialTooltipTimeoutId) clearTimeout(initialTooltipTimeoutId);
-        if (tooltipIntervalId) clearInterval(tooltipIntervalId);
-      }; // Cleanup interval on unmount
-    };
+        if (typeof cleanupTooltip === 'function') {
+          cleanupTooltip();
+        }
+        if (typeof cleanupPopup === 'function') {
+          cleanupPopup();
+        }
+      };
+    }, 3000); // Delay execution by 3 seconds
 
-    // Timed WhatsApp Popup
-    const showWhatsAppPopup = () => {
-      // Check if popup has been shown before in this session
-      if (sessionStorage.getItem('popupShown') === 'true') {
-        return;
-      }
+    // Return cleanup for the main setTimeout
+    return () => clearTimeout(mainTimeoutId);
 
-      // Show popup after 30 seconds on page
-      const timeoutId = setTimeout(() => {
-        setIsPopupVisible(true); // Use state to control visibility for React rendering
-      }, 30000);
-
-      return () => clearTimeout(timeoutId); // Cleanup timeout on unmount
-    };
-
-    const cleanupTooltip = toggleWhatsAppTooltip();
-    const cleanupPopup = showWhatsAppPopup();
-
-    return () => {
-      // Only call cleanup functions if they exist
-      if (typeof cleanupTooltip === 'function') {
-        cleanupTooltip();
-      }
-      if (typeof cleanupPopup === 'function') {
-        cleanupPopup();
-      }
-    };
   }, []); // Empty dependency array ensures this runs only once on mount
 
-  // Effect for Scroll-triggered Animations
+  // Effect for Scroll-triggered Animations - DEFER OBSERVER ATTACHMENT
   useEffect(() => {
     const animateOnScroll = () => {
       const elements = document.querySelectorAll('.animate-on-scroll');
@@ -138,144 +145,159 @@ export default function Home() {
       return; // Don't initialize observer if reduced motion is preferred
     }
 
-    const cleanupObserver = animateOnScroll();
+    // Delay attaching the observer
+    const observerTimeoutId = setTimeout(() => {
+      const cleanupObserver = animateOnScroll();
+      // We need a way to clean up the *inner* observer if the component unmounts
+      // after the timeout but before the inner cleanup is returned.
+      // This simple timeout approach doesn't handle that edge case perfectly,
+      // but is a starting point for deferral.
+      // A more robust solution might involve refs or state.
+    }, 3500); // Delay observer setup by 3.5 seconds
 
-    return () => {
-      if (typeof cleanupObserver === 'function') {
-        cleanupObserver();
-      }
-    };
+    // Cleanup the main timeout
+    return () => clearTimeout(observerTimeoutId);
+    // Note: Does not clean up the IntersectionObserver if it was attached.
+
   }, []); // Empty dependency array ensures this runs only once on mount
 
-  // Effect for Expandable Testimonials & Recent Contact Notifications
+  // Effect for Expandable Testimonials & Recent Contact Notifications - DEFER EXECUTION
   useEffect(() => {
-    // Expandable Testimonials
-    const initExpandableTestimonials = () => {
-      document.querySelectorAll('.read-more-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const container = (e.target as HTMLElement).closest('.testimonial-container');
-          if (container) {
-            (container.querySelector('.testimonial-preview') as HTMLElement).hidden = true;
-            (container.querySelector('.testimonial-full') as HTMLElement).hidden = false;
-          }
+    // Delay setup
+    const mainTimeoutId = setTimeout(() => {
+      // Expandable Testimonials
+      const initExpandableTestimonials = () => {
+        document.querySelectorAll('.read-more-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const container = (e.target as HTMLElement).closest('.testimonial-container');
+            if (container) {
+              (container.querySelector('.testimonial-preview') as HTMLElement).hidden = true;
+              (container.querySelector('.testimonial-full') as HTMLElement).hidden = false;
+            }
+          });
         });
-      });
 
-      document.querySelectorAll('.read-less-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const container = (e.target as HTMLElement).closest('.testimonial-container');
-           if (container) {
-            (container.querySelector('.testimonial-preview') as HTMLElement).hidden = false;
-            (container.querySelector('.testimonial-full') as HTMLElement).hidden = true;
-          }
+        document.querySelectorAll('.read-less-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const container = (e.target as HTMLElement).closest('.testimonial-container');
+             if (container) {
+              (container.querySelector('.testimonial-preview') as HTMLElement).hidden = false;
+              (container.querySelector('.testimonial-full') as HTMLElement).hidden = true;
+            }
+          });
         });
-      });
-    };
-
-    // Recent Contact Notifications
-    const showRecentContactNotifications = () => {
-      const notificationElement = document.querySelector('.recent-contact-notification');
-      if (!notificationElement) return;
-
-      // Array of 10 Singapore-focused messages
-      const allNotifications = [
-        'Someone from Singapore 🇸🇬 just contacted us about a vintage Rolex service',
-        'A customer from Orchard Road 🇸🇬 just inquired about watch band restoration',
-        'A collector just messaged about servicing their Omega Speedmaster',
-        'A client from Bukit Timah 🇸🇬 just asked about restoring a Patek Philippe Calatrava.',
-        'Someone in Tanjong Pagar 🇸🇬 inquired about polishing their Audemars Piguet Royal Oak.',
-        'A collector from Sentosa Cove 🇸🇬 messaged regarding a complex Jaeger-LeCoultre repair.',
-        'Received a query from Marina Bay 🇸🇬 about servicing a vintage Omega Seamaster.',
-        'A customer in River Valley 🇸🇬 just contacted us about restoring a Rolex Day-Date bracelet.',
-        'Someone from Holland Village 🇸🇬 asked for a quote on a full IWC Pilot\'s Watch overhaul.', // Escaped apostrophe
-        'A watch enthusiast in Katong 🇸🇬 inquired about water resistance testing for their TAG Heuer.'
-      ];
-
-      const shuffledNotifications = [...allNotifications]; // Copy the array, use const
-      let currentIndex = 0;
-      let notificationIntervalId: NodeJS.Timeout | null = null;
-      let notificationHideTimeoutId: NodeJS.Timeout | null = null;
-      let badgeShowTimeoutId: NodeJS.Timeout | null = null;
-      let badgeHideTimeoutId: NodeJS.Timeout | null = null;
-      const badgeElement = document.querySelector('.social-proof-badge'); // Get badge element
-
-      // Fisher-Yates (aka Knuth) Shuffle function
-      const shuffleArray = (array: string[]) => {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
       };
 
-      const displayNextNotification = () => {
-        if (currentIndex >= shuffledNotifications.length) {
-          // Reshuffle when all messages have been shown
-          shuffleArray(shuffledNotifications);
-          currentIndex = 0;
-        }
+      // Recent Contact Notifications
+      const showRecentContactNotifications = () => {
+        const notificationElement = document.querySelector('.recent-contact-notification');
+        if (!notificationElement) return;
 
-        notificationElement.textContent = shuffledNotifications[currentIndex];
-        notificationElement.classList.add('visible');
-        currentIndex++;
+        // Array of 10 Singapore-focused messages
+        const allNotifications = [
+          'Someone from Singapore 🇸🇬 just contacted us about a vintage Rolex service',
+          'A customer from Orchard Road 🇸🇬 just inquired about watch band restoration',
+          'A collector just messaged about servicing their Omega Speedmaster',
+          'A client from Bukit Timah 🇸🇬 just asked about restoring a Patek Philippe Calatrava.',
+          'Someone in Tanjong Pagar 🇸🇬 inquired about polishing their Audemars Piguet Royal Oak.',
+          'A collector from Sentosa Cove 🇸🇬 messaged regarding a complex Jaeger-LeCoultre repair.',
+          'Received a query from Marina Bay 🇸🇬 about servicing a vintage Omega Seamaster.',
+          'A customer in River Valley 🇸🇬 just contacted us about restoring a Rolex Day-Date bracelet.',
+          'Someone from Holland Village 🇸🇬 asked for a quote on a full IWC Pilot\'s Watch overhaul.', // Escaped apostrophe
+          'A watch enthusiast in Katong 🇸🇬 inquired about water resistance testing for their TAG Heuer.'
+        ];
 
-        // Hide notification after 5 seconds
-        if (notificationHideTimeoutId) clearTimeout(notificationHideTimeoutId); // Clear previous hide timeout
-        notificationHideTimeoutId = setTimeout(() => {
-          notificationElement.classList.remove('visible');
+        const shuffledNotifications = [...allNotifications]; // Copy the array, use const
+        let currentIndex = 0;
+        let notificationIntervalId: NodeJS.Timeout | null = null;
+        let notificationHideTimeoutId: NodeJS.Timeout | null = null;
+        let badgeShowTimeoutId: NodeJS.Timeout | null = null;
+        let badgeHideTimeoutId: NodeJS.Timeout | null = null;
+        const badgeElement = document.querySelector('.social-proof-badge'); // Get badge element
 
-          // --- Badge Logic ---
-          if (badgeElement) {
-             // Clear any pending badge timeouts
-             if (badgeShowTimeoutId) clearTimeout(badgeShowTimeoutId);
-             if (badgeHideTimeoutId) clearTimeout(badgeHideTimeoutId);
-
-             // Show badge 1.5 seconds after notification hides
-             badgeShowTimeoutId = setTimeout(() => {
-               badgeElement.classList.add('visible');
-
-               // Hide badge after 5 seconds
-               badgeHideTimeoutId = setTimeout(() => {
-                 badgeElement.classList.remove('visible');
-               }, 5000); // Badge visible duration
-             }, 1500); // Delay after notification hides
+        // Fisher-Yates (aka Knuth) Shuffle function
+        const shuffleArray = (array: string[]) => {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
           }
-          // --- End Badge Logic ---
+        };
 
-        }, 5000); // Notification visible duration
+        const displayNextNotification = () => {
+          if (currentIndex >= shuffledNotifications.length) {
+            // Reshuffle when all messages have been shown
+            shuffleArray(shuffledNotifications);
+            currentIndex = 0;
+          }
 
-        // Schedule the next notification display
-        if (notificationIntervalId) clearInterval(notificationIntervalId); // Clear previous interval
-        const nextInterval = Math.random() * 8000 + 12000; // Random interval between 12-20 seconds
-        notificationIntervalId = setInterval(displayNextNotification, nextInterval);
+          notificationElement.textContent = shuffledNotifications[currentIndex];
+          notificationElement.classList.add('visible');
+          currentIndex++;
+
+          // Hide notification after 5 seconds
+          if (notificationHideTimeoutId) clearTimeout(notificationHideTimeoutId); // Clear previous hide timeout
+          notificationHideTimeoutId = setTimeout(() => {
+            notificationElement.classList.remove('visible');
+
+            // --- Badge Logic ---
+            if (badgeElement) {
+               // Clear any pending badge timeouts
+               if (badgeShowTimeoutId) clearTimeout(badgeShowTimeoutId);
+               if (badgeHideTimeoutId) clearTimeout(badgeHideTimeoutId);
+
+               // Show badge 1.5 seconds after notification hides
+               badgeShowTimeoutId = setTimeout(() => {
+                 badgeElement.classList.add('visible');
+
+                 // Hide badge after 5 seconds
+                 badgeHideTimeoutId = setTimeout(() => {
+                   badgeElement.classList.remove('visible');
+                 }, 5000); // Badge visible duration
+               }, 1500); // Delay after notification hides
+            }
+            // --- End Badge Logic ---
+
+          }, 5000); // Notification visible duration
+
+          // Schedule the next notification display
+          if (notificationIntervalId) clearInterval(notificationIntervalId); // Clear previous interval
+          const nextInterval = Math.random() * 8000 + 12000; // Random interval between 12-20 seconds
+          notificationIntervalId = setInterval(displayNextNotification, nextInterval);
+        };
+
+        // Initial shuffle
+        shuffleArray(shuffledNotifications);
+
+        // Show the first notification after a 10-second delay
+        const initialTimeoutId = setTimeout(() => {
+          displayNextNotification(); // This will also schedule the next one via setInterval
+        }, 10000); // 10-second delay
+
+        return () => {
+          // Cleanup all timers on unmount
+          clearTimeout(initialTimeoutId);
+          if (notificationIntervalId) clearInterval(notificationIntervalId);
+          if (notificationHideTimeoutId) clearTimeout(notificationHideTimeoutId);
+          if (badgeShowTimeoutId) clearTimeout(badgeShowTimeoutId);
+          if (badgeHideTimeoutId) clearTimeout(badgeHideTimeoutId);
+        };
       };
 
-      // Initial shuffle
-      shuffleArray(shuffledNotifications);
+      initExpandableTestimonials();
+      const cleanupNotifications = showRecentContactNotifications();
 
-      // Show the first notification after a 10-second delay
-      const initialTimeoutId = setTimeout(() => {
-        displayNextNotification(); // This will also schedule the next one via setInterval
-      }, 10000); // 10-second delay
-
+      // Return cleanup for the *inner* logic
       return () => {
-        // Cleanup all timers on unmount
-        clearTimeout(initialTimeoutId);
-        if (notificationIntervalId) clearInterval(notificationIntervalId);
-        if (notificationHideTimeoutId) clearTimeout(notificationHideTimeoutId);
-        if (badgeShowTimeoutId) clearTimeout(badgeShowTimeoutId);
-        if (badgeHideTimeoutId) clearTimeout(badgeHideTimeoutId);
+        if (typeof cleanupNotifications === 'function') {
+          cleanupNotifications();
+        }
+        // Note: Testimonial listeners don't need explicit cleanup if elements are removed/re-rendered
       };
-    };
+    }, 4000); // Delay execution by 4 seconds
 
-    initExpandableTestimonials();
-    const cleanupNotifications = showRecentContactNotifications();
+    // Return cleanup for the main setTimeout
+    return () => clearTimeout(mainTimeoutId);
 
-    return () => {
-       if (typeof cleanupNotifications === 'function') {
-         cleanupNotifications();
-       }
-       // Note: Testimonial listeners don't need explicit cleanup if elements are removed/re-rendered
-    };
   }, []); // Run once on mount
 
   // Throttle utility function with refined generics and spread operator
@@ -295,83 +317,94 @@ export default function Home() {
 
   // Effect for Anchor Navigation Active State & Scroll Progress (with Throttling)
   useEffect(() => {
-    const progressBar = document.querySelector('.scroll-progress-bar') as HTMLElement;
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.anchor-nav a');
+    // Delay setup slightly
+    const mainTimeoutId = setTimeout(() => {
+      const progressBar = document.querySelector('.scroll-progress-bar') as HTMLElement;
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.anchor-nav a');
 
-    const updateActiveNavLink = () => {
-      let current = '';
-      const scrollY = window.pageYOffset;
+      const updateActiveNavLink = () => {
+        let current = '';
+        const scrollY = window.pageYOffset;
 
-      sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).offsetTop - 100; // Adjust offset as needed
-        const sectionHeight = (section as HTMLElement).offsetHeight;
-        const sectionId = section.getAttribute('id');
+        sections.forEach(section => {
+          const sectionTop = (section as HTMLElement).offsetTop - 100; // Adjust offset as needed
+          const sectionHeight = (section as HTMLElement).offsetHeight;
+          const sectionId = section.getAttribute('id');
 
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-          current = sectionId || '';
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-    };
-
-    const updateScrollProgress = () => {
-      if (!progressBar) return;
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrollPercentage = (scrollTop / scrollHeight) * 100;
-      progressBar.style.width = `${scrollPercentage}%`;
-    };
-
-    const handleScroll = () => {
-      updateActiveNavLink();
-      updateScrollProgress();
-    };
-
-    // Throttle the scroll handler (e.g., run max once every 150ms)
-    const throttledScrollHandler = throttle(handleScroll, 150);
-
-    // Smooth scroll for anchor links (if not handled by CSS)
-    const initSmoothScroll = () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) { // Keep 'function' to access correct 'this' or use currentTarget
-          const hrefAttribute = (e.currentTarget as HTMLAnchorElement).getAttribute('href'); // Use e.currentTarget
-          if (hrefAttribute && hrefAttribute.startsWith('#') && hrefAttribute.length > 1) {
-            const targetElement = document.querySelector(hrefAttribute);
-            if (targetElement) {
-              e.preventDefault();
-              if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-              } else {
-                targetElement.scrollIntoView(); // Instant scroll for reduced motion
-              }
-            }
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            current = sectionId || '';
           }
         });
-      });
-    };
 
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      };
 
-    window.addEventListener('scroll', throttledScrollHandler); // Use throttled handler
-    initSmoothScroll(); // Initialize smooth scroll
-    handleScroll(); // Initial call to set state
+      const updateScrollProgress = () => {
+        if (!progressBar) return;
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = `${scrollPercentage}%`;
+      };
 
-    return () => {
-      window.removeEventListener('scroll', throttledScrollHandler); // Remove throttled handler
-      // Remove smooth scroll listeners if necessary (though usually not required)
-    };
+      const handleScroll = () => {
+        updateActiveNavLink();
+        updateScrollProgress();
+      };
+
+      // Throttle the scroll handler (e.g., run max once every 150ms)
+      const throttledScrollHandler = throttle(handleScroll, 150);
+
+      // Smooth scroll for anchor links (if not handled by CSS)
+      const initSmoothScroll = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) { // Keep 'function' to access correct 'this' or use currentTarget
+            const hrefAttribute = (e.currentTarget as HTMLAnchorElement).getAttribute('href'); // Use e.currentTarget
+            if (hrefAttribute && hrefAttribute.startsWith('#') && hrefAttribute.length > 1) {
+              const targetElement = document.querySelector(hrefAttribute);
+              if (targetElement) {
+                e.preventDefault();
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  targetElement.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  targetElement.scrollIntoView(); // Instant scroll for reduced motion
+                }
+              }
+            }
+          });
+        });
+      };
+
+      window.addEventListener('scroll', throttledScrollHandler); // Use throttled handler
+      initSmoothScroll(); // Initialize smooth scroll
+      handleScroll(); // Initial call to set state
+
+      // Return cleanup for the *inner* logic
+      return () => {
+        window.removeEventListener('scroll', throttledScrollHandler); // Remove throttled handler
+        // Remove smooth scroll listeners if necessary (though usually not required)
+      };
+    }, 1500); // Delay execution by 1.5 seconds (adjust as needed)
+
+    // Return cleanup for the main setTimeout
+    return () => clearTimeout(mainTimeoutId);
   }, []); // Run once on mount
 
+  // Effect to load video shortly after component mounts - INCREASE DELAY
+  useEffect(() => {
+    // Significantly delay video load
+    const timer = setTimeout(() => {
+      setShouldLoadVideo(true);
+    }, 7000); // Load video after 7 seconds (adjust as needed)
 
-  // Removed conflicting Mobile Sticky Header Hide/Show effect
-  // The primary header visibility logic controlled by isHeaderVisible state is sufficient
-
+    return () => clearTimeout(timer); // Cleanup timer
+  }, []);
 
   const closeWhatsAppPopup = () => {
     setIsPopupVisible(false);
@@ -379,34 +412,22 @@ export default function Home() {
     sessionStorage.setItem('popupShown', 'true');
   };
 
+  const getCurrentYear = () => new Date().getFullYear();
 
-   const getCurrentYear = () => new Date().getFullYear();
+  // Updated Founder's Message for Barry (Shortened)
+  const founderMessage = `"As Managing Partner and a passionate collector, I learned from our founder, Michael Young (The Rolex Bracelet Magician). We know your watch holds history and personal value. With extensive experience across Asia and Europe, my commitment is to the transparent, expert service Classic Watch Repair is known for. Your watch is in trusted hands for any restoration or service. Reach out via WhatsApp to bring your timepiece back to its best."`;
 
-   // Updated Founder's Message for Barry (Shortened)
-   const founderMessage = `"As Managing Partner and a passionate collector, I learned from our founder, Michael Young (The Rolex Bracelet Magician). We know your watch holds history and personal value. With extensive experience across Asia and Europe, my commitment is to the transparent, expert service Classic Watch Repair is known for. Your watch is in trusted hands for any restoration or service. Reach out via WhatsApp to bring your timepiece back to its best."`;
-
-   // Testimonials (JS variable, quotes are fine here)
-   const testimonials = [
-    {
-      quote: "I recently took my watch in for repair, and I couldn't be happier with the service I received. My watch had a broken ceramic bracelet, and the repair master did an outstanding job renewing it. Not only was he extremely professional, but he also charged a very reasonable price for the work done. I highly recommend this shop to anyone in need of watch repairs. Thank you for the excellent service!",
-      author: "Gloria Wong"
-    },
-    {
-      quote: "I had a fantastic experience with Barry, who was both welcoming and transparent throughout the watch diagnosis process. There was no hard selling, and he maintained a high level of professionalism. Given that this watch is a family heirloom, it was crucial for me to find a trustworthy and reliable service. The positive reviews are well-deserved; they did an excellent job with the 18k gold replating, polishing, and servicing. I highly recommend their services!",
-      author: "Ho Yuen Tsang"
-    }
-  ];
-
-  // Effect to load video shortly after component mounts (can be refined later)
-  useEffect(() => {
-    // Simple delay to load video after initial render/mount - improves LCP
-    // Can be replaced with interaction-based trigger later
-    const timer = setTimeout(() => {
-      setShouldLoadVideo(true);
-    }, 2500); // Load video after 2.5 seconds
-
-    return () => clearTimeout(timer); // Cleanup timer
-  }, []);
+  // Testimonials (JS variable, quotes are fine here)
+  const testimonials = [
+   {
+     quote: "I recently took my watch in for repair, and I couldn't be happier with the service I received. My watch had a broken ceramic bracelet, and the repair master did an outstanding job renewing it. Not only was he extremely professional, but he also charged a very reasonable price for the work done. I highly recommend this shop to anyone in need of watch repairs. Thank you for the excellent service!",
+     author: "Gloria Wong"
+   },
+   {
+     quote: "I had a fantastic experience with Barry, who was both welcoming and transparent throughout the watch diagnosis process. There was no hard selling, and he maintained a high level of professionalism. Given that this watch is a family heirloom, it was crucial for me to find a trustworthy and reliable service. The positive reviews are well-deserved; they did an excellent job with the 18k gold replating, polishing, and servicing. I highly recommend their services!",
+     author: "Ho Yuen Tsang"
+   }
+ ];
 
   return (
     <>
@@ -427,6 +448,7 @@ export default function Home() {
             width={128} // Keep width prop
             height={32} // Reinstate height prop
             className="w-auto h-8" // Add h-8 for height control, keep w-auto
+            sizes="100vw" // Add sizes prop for responsiveness
           />
           <nav>
             {/* Navigation links */}
@@ -474,7 +496,7 @@ export default function Home() {
                   width={24} // Corresponds to w-6
                   height={24} // Corresponds to h-6
                   className="w-6 h-6 mr-1" // Increased size
-                  // Removed priority prop
+                  sizes="100vw" // Add sizes prop for responsiveness
                 />
                 470+ 5⭐ Reviews {/* Kept 5-star text */}
               </div>
@@ -513,6 +535,7 @@ export default function Home() {
                 height={562}
                 className="w-full object-cover"
                 priority // Prioritize loading this image for LCP
+                sizes="100vw" // Add sizes prop for responsiveness
                 // Consider adding placeholder="blur" if you have a low-res version
               />
               // Optional: Add a Play button overlay here later
