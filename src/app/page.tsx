@@ -5,7 +5,7 @@
 import React, { useState, useEffect, useRef } from 'react'; // Import hooks
 import Image from 'next/image'; // Import next/image
 import {
-  Watch, Settings, Wrench, Sparkles, MessageSquareText, MapPin, CheckCircle, PackageCheck, ShieldCheck, MessageCircle, X, PlayCircle
+  Watch, Settings, Wrench, Sparkles, MessageSquareText, MapPin, CheckCircle, PackageCheck, ShieldCheck, MessageCircle, X
 } from 'lucide-react'; // Added X icon for popup close
 // import ImageCompareSliderComponent from '@/components/ImageCompareSlider'; // No longer needed here
 import ImageCompareGallery from '@/components/ImageCompareGallery'; // Import the new gallery component
