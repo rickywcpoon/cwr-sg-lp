@@ -23,6 +23,8 @@ export default function Home() {
   // Refs for elements
   const topLogoRef = useRef<HTMLDivElement>(null); // Ref for the top logo container
   const headerRef = useRef<HTMLElement>(null); // Ref for the header
+  // Ref to hold the IntersectionObserver cleanup function
+  const observerCleanupRef = useRef<(() => void) | undefined>(undefined);
 
   // Effect to handle scroll event
   useEffect(() => {
@@ -132,7 +134,7 @@ export default function Home() {
         observer.observe(element);
       });
 
-      return () => observer.disconnect(); // Cleanup observer on unmount
+      return () => observer.disconnect(); // Return the cleanup function
     };
 
     // Check for reduced motion preference
@@ -147,17 +149,18 @@ export default function Home() {
 
     // Delay attaching the observer
     const observerTimeoutId = setTimeout(() => {
-      const cleanupObserver = animateOnScroll();
-      // We need a way to clean up the *inner* observer if the component unmounts
-      // after the timeout but before the inner cleanup is returned.
-      // This simple timeout approach doesn't handle that edge case perfectly,
-      // but is a starting point for deferral.
-      // A more robust solution might involve refs or state.
+      // Call animateOnScroll and store its cleanup function in the ref
+      observerCleanupRef.current = animateOnScroll();
     }, 3500); // Delay observer setup by 3.5 seconds
 
-    // Cleanup the main timeout
-    return () => clearTimeout(observerTimeoutId);
-    // Note: Does not clean up the IntersectionObserver if it was attached.
+    // Cleanup function for the useEffect hook
+    return () => {
+      clearTimeout(observerTimeoutId); // Clear the timeout if it hasn't run yet
+      // If the timeout did run and the observer was created, call its cleanup function
+      if (typeof observerCleanupRef.current === 'function') {
+        observerCleanupRef.current();
+      }
+    };
 
   }, []); // Empty dependency array ensures this runs only once on mount
 
