@@ -515,9 +515,9 @@ export default function Home() {
             {/* REMOVED scroll animation & Add container for CTA - Badge moved */}
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
               {/* Reverted text color back to white per user request */}
-              <a href="https://wa.me/6589038755" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
-                <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
-              </a>
+                          <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="cta-button inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 btn clickable"> {/* Added clickable */}
+              <MessageCircle className="w-6 h-6 md:w-5 md:h-5 mr-2" /> {/* Responsive size */} Chat on WhatsApp
+            </a>
               {/* Trust Badge moved above H1 */}
             </div>
             {/* Urgency Trigger - REMOVED scroll animation */}
@@ -641,7 +641,7 @@ export default function Home() {
               {/* Added section-heading */}
               <h4 className="section-heading text-lg font-semibold mb-1">Watch Repair Declined Elsewhere?</h4>
               <p className="text-sm mb-3">Let our specialists take a look. We often succeed where others can't.</p>
-              <a href="https://wa.me/6589038755?text=My%20watch%20repair%20was%20declined%20elsewhere,%20can%20you%20help?" className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
+              <a href="https://wa.me/85260616572?text=My%20watch%20repair%20was%20declined%20elsewhere,%20can%20you%20help?" className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
                 <MessageCircle className="w-4 h-4 mr-2" /> Chat About Declined Repair
               </a>
             </div>
@@ -830,7 +830,7 @@ export default function Home() {
               {/* Added section-heading */}
               <h4 className="section-heading text-lg font-semibold mb-1">Questions About the Process?</h4>
               <p className="text-sm mb-3">We're happy to clarify how our secure drop-off and repair system works.</p>
-              <a href="https://wa.me/6589038755?text=I%20have%20a%20question%20about%20the%20repair%20process." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
+              <a href="https://wa.me/85260616572?text=I%20have%20a%20question%20about%20the%20repair%20process." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
                 <MessageCircle className="w-4 h-4 mr-2" /> Ask About the Process
               </a>
             </div>
@@ -961,7 +961,7 @@ export default function Home() {
               {/* Added section-heading */}
               <h4 className="section-heading text-lg font-semibold mb-1">Need Assurance for Your Valuable Watch?</h4>
               <p className="text-sm mb-3">Chat with us about our secure handling, warranty, and expertise.</p>
-              <a href="https://wa.me/6589038755?text=I'd%20like%20to%20know%20more%20about%20your%20guarantees%20and%20expertise." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
+              <a href="https://wa.me/85260616572?text=I'd%20like%20to%20know%20more%20about%20your%20guarantees%20and%20expertise." className="contextual-whatsapp-btn btn clickable" target="_blank" rel="noopener noreferrer"> {/* Added btn, clickable */}
                 <MessageCircle className="w-4 h-4 mr-2" /> Discuss Your Watch Concerns
               </a>
             </div>
@@ -1012,7 +1012,7 @@ export default function Home() {
               Don't let your treasured timepiece sit idle. Connect with a Classic Watch Repair specialist today for expert advice and a no-obligation consultation. Experience the difference dedicated craftsmanship makes.
             </p>
             {/* Apply scroll animation */}
-            <a href="https://wa.me/6589038755" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 mb-4 animate-on-scroll fade-in btn clickable" style={{ transitionDelay: '0.2s' }}> {/* Added clickable */}
+            <a href="https://wa.me/85260616572" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-brand-gold hover:bg-opacity-90 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 mb-4 animate-on-scroll fade-in btn clickable" style={{ transitionDelay: '0.2s' }}> {/* Added clickable */}
               <MessageCircle className="w-4 h-4 mr-2" /> Chat on WhatsApp
               <span className="online-badge">Online Now</span> {/* Added Online Badge */}
             </a>
@@ -1062,7 +1062,7 @@ export default function Home() {
 
       <a
         id="whatsapp-cta"
-        href="https://wa.me/6589038755"
+        href="https://wa.me/85260616572"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-button relative" // Use new class, add relative for positioning children
@@ -1106,7 +1106,7 @@ export default function Home() {
           </p>
           {/* Changed text-white to text-black for contrast */}
           <a
-            href="https://wa.me/6589038755"
+            href="https://wa.me/85260616572"
             className="block w-full bg-green-500 hover:bg-green-600 text-black text-center py-2 rounded-md"
             target="_blank"
             rel="noopener noreferrer"
